@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,9 +8,10 @@ using UnityEngine.UI;
 public class CardManager : MonoBehaviour
 {
     public static CardManager card;
-    public List<GameObject> Hand = new List<GameObject>();
-    public List<GameObject> Deck = new List<GameObject>();
     public GameObject CardUi;
+    public List<GameObject> Hand = new List<GameObject>();
+    public List<GameObject> Deck = new List<GameObject>(); 
+    // 개발용으로 덱 남겨둠. 베이스캠프에서 편성 만들면 바꿀 예정
 
     void Awake()
     {
@@ -17,23 +19,20 @@ public class CardManager : MonoBehaviour
         CardUi = gameObject;
         DrawCard(); DrawCard(); DrawCard(); DrawCard(); DrawCard();
     }
-    public void UseCard(Card_Base card)
-    {
-        int[] CardCost = card.Card_Cost;
-        int[] CostNow = CostManager.cost.GetComponent<CostManager>().CostCount();
 
-        if (CostNow[0] >= CardCost[0] && CostNow[1] >= CardCost[1] && (CostNow[2] >= CardCost[2] || CostNow[3] >= CardCost[2]))
-        {
-            card.execute();
-            CostManager.cost.GetComponent< CostManager> ().CostUse(CardCost);
-        }
-        else
-            Debug.Log("Can't Use Card");
-    }
     public void UseCardNo(int i)
     {
-        Card_Base card = Hand[i].GetComponent<Card_Base>();
-        UseCard(card);
+        if (Hand.Count > i)
+        {
+            Card_Base card = Hand[i].GetComponent<Card_Base>();
+            if (CostManager.cost.GetComponent<CostManager>().CostUse(card.Card_Cost))
+            {
+                card.execute();
+                Hand.Remove(Hand[i]);
+            }
+            else
+                Debug.Log("Can't Use Card");
+        }      
     }
 
     public void DrawCard()
@@ -41,8 +40,9 @@ public class CardManager : MonoBehaviour
         Hand.Add(Deck[0]);
         Deck.RemoveAt(0);
     }
-    
+
     public void uiReset()
     {
+       
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3537834707866429111}
   - component: {fileID: 7457071635115500369}
   m_Layer: 0
-  m_Name: TestCard
+  m_Name: TestCard 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec92402f4c3f0e4db0a0d19b812415b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Card_Cost: 010000000100000000000000
+  Card_Cost: 1
   Card_Name: TestCard
   Card_Icon: {fileID: -9038209668444257389, guid: 9ef7a1cbe37984446837e352c03b1a02, type: 3}
   target: {fileID: 6221381111365965259, guid: f9343c90df68c634ca07cf375aa33d49, type: 3}
