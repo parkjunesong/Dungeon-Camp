@@ -7,12 +7,15 @@ using UnityEngine.UI;
 public class CardManager : MonoBehaviour
 {
     public static CardManager card;
+    public List<GameObject> Hand = new List<GameObject>();
+    public List<GameObject> Deck = new List<GameObject>();
     public GameObject CardUi;
 
     void Awake()
     {
         card = this;
-        CardUi = GameObject.Find("ÇÚµå");
+        CardUi = gameObject;
+        DrawCard(); DrawCard(); DrawCard(); DrawCard(); DrawCard();
     }
     public void UseCard(Card_Base card)
     {
@@ -26,6 +29,17 @@ public class CardManager : MonoBehaviour
         }
         else
             Debug.Log("Can't Use Card");
+    }
+    public void UseCardNo(int i)
+    {
+        Card_Base card = Hand[i].GetComponent<Card_Base>();
+        UseCard(card);
+    }
+
+    public void DrawCard()
+    {
+        Hand.Add(Deck[0]);
+        Deck.RemoveAt(0);
     }
     
     public void uiReset()

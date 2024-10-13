@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.UI.CanvasScaler;
 
 public class Unit : MonoBehaviour
 {
     public UnitData Data;
     public UnitAblity Ability;
     public UnitUi Ui;
-    public int GroupNo; // Enemy 사망시 GroupNo 갱신 필요
 
     void Awake()
     {       
         Ability = new UnitAblity(Data);                     
-        Ui = transform.GetChild(1).GetComponent<UnitUi>();
+        Ui = transform.GetChild(0).GetComponent<UnitUi>();
+        gameObject.GetComponent<SpriteRenderer>().sprite = Data.Standing;
     }
     public void Attack(int i)
     {

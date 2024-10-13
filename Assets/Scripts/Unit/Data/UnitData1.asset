@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b19e262d6fd36949a8cb2e20af519e2, type: 3}
+  m_Name: UnitData1
+  m_EditorClassIdentifier: 
+  Name: test
+  Class: test
+  UT: 0
+  AT: 1
+  AS: 1
+  HP: 100
+  DF: 1
+  AR: 1
+  MS: 1
+  CR: 1
+  CD: 1
+  Face: {fileID: -2775032874363633056, guid: 538c69b773d8c8a4eb4bc8e6fa2627ca, type: 3}
+  Standing: {fileID: -2775032874363633056, guid: 538c69b773d8c8a4eb4bc8e6fa2627ca, type: 3}

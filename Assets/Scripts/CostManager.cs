@@ -37,7 +37,7 @@ public class CostManager : MonoBehaviour
     }
     void Start()
     {
-        CostUi = GameObject.Find("코스트보드");
+        CostUi = gameObject;
         CostSprite[0] = Resources.Load("Mana", typeof(Sprite)) as Sprite;
         CostSprite[1] = Resources.Load("Prana", typeof(Sprite)) as Sprite;
         CostSprite[2] = Resources.Load("Karna", typeof(Sprite)) as Sprite;        
