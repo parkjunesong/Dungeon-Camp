@@ -23,5 +23,5 @@ MonoBehaviour:
   MS: 1
   CR: 1
   CD: 1
-  Face: {fileID: -2775032874363633056, guid: 538c69b773d8c8a4eb4bc8e6fa2627ca, type: 3}
-  Standing: {fileID: -2775032874363633056, guid: 538c69b773d8c8a4eb4bc8e6fa2627ca, type: 3}
+  Face: {fileID: 21300000, guid: 4ab35e263cd16cf4d9adfce11409da70, type: 3}
+  Standing: {fileID: 21300000, guid: 4ab35e263cd16cf4d9adfce11409da70, type: 3}
