@@ -34,7 +34,6 @@ public class CampFireManager : MonoBehaviour
             {
                 Name = "Hero_" + UnityEngine.Random.Range(1, 999), //임시 이름
                 Class = randomClass.className,
-                UT = UnitType.Unit_Alive,
                 AT = 1,
                 AS = 1,
                 AR = 10,
