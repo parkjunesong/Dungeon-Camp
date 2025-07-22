@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CampFire : MonoBehaviour
+public class TrainingCamp : MonoBehaviour
 {
-    public GameObject campFirePanel;
+    public GameObject yellowPanel;
 
     void OnMouseDown()
     {
@@ -13,9 +13,9 @@ public class CampFire : MonoBehaviour
             return;
         }
 
-        if (campFirePanel != null)
+        if (yellowPanel != null)
         {
-            CampUIManager.OpenUIPanel(campFirePanel);
+            CampUIManager.OpenUIPanel(yellowPanel);
         }
     }
 }

@@ -4,13 +4,39 @@ using UnityEngine;
 
 public class CampUIManager : MonoBehaviour
 {
-    public GameObject campFirePanel;
+    private static GameObject currentOpenPanel = null;
 
-    public void CloseCampFirePanel()
+    public static bool isUIPanelOpen
     {
-        if (campFirePanel != null)
+        get
         {
-            campFirePanel.SetActive(false);
+            return currentOpenPanel != null;
         }
+    }
+
+    public static void OpenUIPanel(GameObject panel)
+    {
+        if (currentOpenPanel != null)
+        {
+            return;
+        }
+
+        currentOpenPanel = panel;
+        currentOpenPanel.SetActive(true);
+    }
+
+    public static void CloseUIPanel()
+    {
+        if (currentOpenPanel != null)
+        {
+            currentOpenPanel.SetActive(false);
+            currentOpenPanel = null;
+        }
+    }
+
+    //ºÒÇÊ¿ä
+    public void OnCloseButtonClicked()
+    {
+        CloseUIPanel();
     }
 }
