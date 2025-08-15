@@ -9,7 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c15d5ac01911ade40ac0fc6c33f6b9cc, type: 3}
-  m_Name: Warrior
+  m_Script: {fileID: 11500000, guid: 9b19e262d6fd36949a8cb2e20af519e2, type: 3}
+  m_Name: UnitData 3
   m_EditorClassIdentifier: 
-  className: Warrior
+  Name: unit1
+  Class: class
+  AT: 10
+  AS: 10
+  HP: 10
+  DF: 10
+  AR: 10
+  MS: 10
+  CR: 10
+  CD: 10
+  Face: {fileID: 0}
+  Standing: {fileID: 0}

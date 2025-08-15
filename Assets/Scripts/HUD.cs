@@ -23,7 +23,7 @@ public class HUD : MonoBehaviour
         switch (type)
         {
             case InfoType.Money:
-                text.text = string.Format("GOLD: {0:F0}", GameManager.instance.money);
+                //text.text = string.Format("GOLD: {0:F0}", GameManager.instance.money);
                 break;
 
             case InfoType.UnitExp:

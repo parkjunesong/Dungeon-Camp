@@ -7,14 +7,14 @@ public class CampFireManager : MonoBehaviour
 {
     public Transform unitListContainer;
     public GameObject unitCardPrefab;
-    public List<UnitClassData> availableClasses; //현재 나올 수 있는 모든 클래스들
 
-    public List<UnitData> playerUnitList = new(); //플레이어가 모집한 유닛 리스트
+    public List<UnitData> availableUnits; //현재 나올 수 있는 모든 유닛들
     public List<UnitData> recruitList = new(); //모집가능한 유닛 리스트
+    public List<UnitData> playerUnitList = new(); //플레이어가 모집한 유닛 리스트
 
     void Start()
     {
-        if (availableClasses == null || availableClasses.Count == 0)
+        if (availableUnits == null || availableUnits.Count == 0)
         {
             Debug.LogError("No available classes!!");
             return;
@@ -28,22 +28,7 @@ public class CampFireManager : MonoBehaviour
 
         for (int i = 0; i < 3; i++) //임시로 3명 생성
         {
-            UnitClassData randomClass = availableClasses[UnityEngine.Random.Range(0, availableClasses.Count)];
-
-            UnitData newUnit = new UnitData
-            {
-                Name = "Hero_" + UnityEngine.Random.Range(1, 999), //임시 이름
-                Class = randomClass.className,
-                AT = 1,
-                AS = 1,
-                AR = 10,
-                DF = 1,
-                MS = 1, //임시 스텟들
-                HP = 10,
-                CR = 10f,
-                CD = 10f
-            };
-
+            UnitData newUnit = availableUnits[UnityEngine.Random.Range(0, availableUnits.Count)];
             recruitList.Add(newUnit);
         }
 

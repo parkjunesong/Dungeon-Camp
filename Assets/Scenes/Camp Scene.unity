@@ -1624,12 +1624,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitListContainer: {fileID: 63966226}
   unitCardPrefab: {fileID: 1724727385908236368, guid: 032459a51a926bd41a49ea70bfd598a1, type: 3}
-  availableClasses:
-  - {fileID: 11400000, guid: 6da452820dfd8b24e91d32e58ef88bc2, type: 2}
-  - {fileID: 11400000, guid: 65eb9271120822d4bbcc840c5ecb5f8f, type: 2}
-  - {fileID: 11400000, guid: 26919e8d995f0a542aa052221a47e712, type: 2}
-  playerUnitList: []
+  availableUnits:
+  - {fileID: 11400000, guid: 3487eba49ce48f546bb7fb8aabe9953a, type: 2}
+  - {fileID: 11400000, guid: 5613d79340c2d27428df60bc9c00ea73, type: 2}
+  - {fileID: 11400000, guid: 9980be63f167d004db1f935ec8564b47, type: 2}
   recruitList: []
+  playerUnitList: []
 --- !u!1 &1152995128
 GameObject:
   m_ObjectHideFlags: 0
@@ -2305,51 +2305,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1742026071
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1742026072}
-  - component: {fileID: 1742026073}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1742026072
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1742026071}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1742026073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1742026071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cd7e87c1e61bc94cb96e2b84eeef47a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  money: 10000
 --- !u!1 &1822817572
 GameObject:
   m_ObjectHideFlags: 0
@@ -2947,7 +2902,6 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1742026072}
   - {fileID: 1168336288}
   - {fileID: 1067765554}
   - {fileID: 2132224236}

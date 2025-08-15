@@ -10,18 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b19e262d6fd36949a8cb2e20af519e2, type: 3}
-  m_Name: UnitData1
+  m_Name: UnitData 2
   m_EditorClassIdentifier: 
-  Name: test
-  Class: test
-  UT: 0
-  AT: 1
-  AS: 1
-  HP: 100
-  DF: 1
-  AR: 1
-  MS: 1
-  CR: 1
-  CD: 1
-  Face: {fileID: 21300000, guid: 4ab35e263cd16cf4d9adfce11409da70, type: 3}
-  Standing: {fileID: 21300000, guid: 4ab35e263cd16cf4d9adfce11409da70, type: 3}
+  Name: unit1
+  Class: class
+  AT: 10
+  AS: 10
+  HP: 10
+  DF: 10
+  AR: 10
+  MS: 10
+  CR: 10
+  CD: 10
+  Face: {fileID: 0}
+  Standing: {fileID: 0}
