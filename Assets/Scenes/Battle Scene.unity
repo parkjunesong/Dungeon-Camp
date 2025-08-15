@@ -743,70 +743,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 455143661}
   m_CullTransparentMesh: 0
---- !u!1 &472647110
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 472647112}
-  - component: {fileID: 472647111}
-  - component: {fileID: 472647113}
-  m_Layer: 0
-  m_Name: StageManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &472647111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 472647110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46375d64e2b5d214f8339d2786d11679, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StageData: {fileID: 11400000, guid: c016a5c7f44437646bdd442fbf3879e5, type: 2}
-  DeckData: {fileID: 472647113}
---- !u!4 &472647112
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 472647110}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 883.4179, y: 416.0172, z: 7.596301}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &472647113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 472647110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d40425e4deeb7841a863a41872fdf39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerUnitData:
-  - {fileID: 11400000, guid: 3487eba49ce48f546bb7fb8aabe9953a, type: 2}
-  - {fileID: 11400000, guid: 3487eba49ce48f546bb7fb8aabe9953a, type: 2}
-  - {fileID: 11400000, guid: 3487eba49ce48f546bb7fb8aabe9953a, type: 2}
-  Cards: []
 --- !u!1 &477033372
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,7 +1216,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -386.3081}
+  m_AnchoredPosition: {x: 0, y: -400}
   m_SizeDelta: {x: 1000, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &749542555
@@ -2529,6 +2465,7 @@ GameObject:
   - component: {fileID: 1797649155}
   - component: {fileID: 1797649157}
   - component: {fileID: 1797649156}
+  - component: {fileID: 1797649158}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2593,8 +2530,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7747177af87ce48851a61de2c89880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StageData: {fileID: 0}
-  DeckData: {fileID: 0}
+  StageData: {fileID: 11400000, guid: c016a5c7f44437646bdd442fbf3879e5, type: 2}
+  DeckData: {fileID: 1797649158}
+--- !u!114 &1797649158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797649151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d40425e4deeb7841a863a41872fdf39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerUnitData:
+  - {fileID: 11400000, guid: 3487eba49ce48f546bb7fb8aabe9953a, type: 2}
+  - {fileID: 11400000, guid: 3487eba49ce48f546bb7fb8aabe9953a, type: 2}
+  - {fileID: 11400000, guid: 3487eba49ce48f546bb7fb8aabe9953a, type: 2}
+  Cards: []
 --- !u!1 &1926572680
 GameObject:
   m_ObjectHideFlags: 0
@@ -2886,4 +2840,3 @@ SceneRoots:
   - {fileID: 445709109}
   - {fileID: 1684625000}
   - {fileID: 1568801382}
-  - {fileID: 472647112}
