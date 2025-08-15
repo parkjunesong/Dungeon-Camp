@@ -803,7 +803,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerUnitData:
-  - {fileID: 11400000, guid: f5ad7ced11d08d14a96d5d427d480c0d, type: 2}
+  - {fileID: 11400000, guid: 3487eba49ce48f546bb7fb8aabe9953a, type: 2}
+  - {fileID: 11400000, guid: 3487eba49ce48f546bb7fb8aabe9953a, type: 2}
+  - {fileID: 11400000, guid: 3487eba49ce48f546bb7fb8aabe9953a, type: 2}
   Cards: []
 --- !u!1 &477033372
 GameObject:
@@ -1697,8 +1699,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5564ca656eae0429594a6d5456612f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 0
-  CostUi: {fileID: 0}
 --- !u!1 &1467172725
 GameObject:
   m_ObjectHideFlags: 0

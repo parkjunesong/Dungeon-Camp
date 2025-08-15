@@ -18,8 +18,8 @@ public class SystemManager : MonoBehaviour
 
     void Start()
     {
-        StageData = Instantiate(StageManager.Instance.StageData);
-        DeckData = Instantiate(StageManager.Instance.DeckData);   
+        //StageData = Instantiate(StageManager.Instance.StageData);
+        //DeckData = Instantiate(StageManager.Instance.DeckData);   
         BattleManager.Instance.BattleStart();           
     }  
 }

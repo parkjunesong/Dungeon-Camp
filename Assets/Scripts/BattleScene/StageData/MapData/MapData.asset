@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: MapData
   m_EditorClassIdentifier: 
   EnemyUnitData:
-  - {fileID: 11400000, guid: f5ad7ced11d08d14a96d5d427d480c0d, type: 2}
-  - {fileID: 11400000, guid: f5ad7ced11d08d14a96d5d427d480c0d, type: 2}
+  - {fileID: 11400000, guid: 3487eba49ce48f546bb7fb8aabe9953a, type: 2}
+  - {fileID: 11400000, guid: 3487eba49ce48f546bb7fb8aabe9953a, type: 2}
+  - {fileID: 11400000, guid: 3487eba49ce48f546bb7fb8aabe9953a, type: 2}
