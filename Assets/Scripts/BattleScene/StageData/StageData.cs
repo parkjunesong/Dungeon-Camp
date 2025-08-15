@@ -10,6 +10,7 @@ public class StageData : ScriptableObject
     public StageType Type;
     public string Name;
     public string Description;
-    public MapData mData;
+    public GameObject MapData;
+    public List<UnitData> EnemyUnitData = new();
     //public ScenarioData sData;
 }

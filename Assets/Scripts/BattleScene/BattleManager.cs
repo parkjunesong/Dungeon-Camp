@@ -27,14 +27,16 @@ public class BattleManager : MonoBehaviour
     {
         Turn = 0;
         TurnUi = GameObject.Find("Turn");
+        MapData md = SystemManager.Instance.StageData.MapData.GetComponent<MapData>();
+        DeckData dd = SystemManager.Instance.DeckData;
 
-        foreach (UnitData data in SystemManager.Instance.DeckData.PlayerUnitData)
+        for (int i = 0; i< dd.PlayerUnitData.Count; i++)
         {
-            UnitSpawnManager.Instance.Spawn(data, new Vector2(), "Player");
+            UnitSpawnManager.Instance.Spawn(dd.PlayerUnitData[i], md.Layers[0].Tilemap[0], md.PlayerSpawnPoint[i], "Player");
         }
-        foreach (UnitData data in SystemManager.Instance.StageData.mData.EnemyUnitData)
+        for (int i = 0; i < SystemManager.Instance.StageData.EnemyUnitData.Count; i++)
         {
-            UnitSpawnManager.Instance.Spawn(data, new Vector2(), "Enemy");
+            UnitSpawnManager.Instance.Spawn(SystemManager.Instance.StageData.EnemyUnitData[i], md.Layers[0].Tilemap[0], md.EnemySpawnPoint[i], "Enemy");
         }
         alivePlayerUnits = PlayerUnits;
     

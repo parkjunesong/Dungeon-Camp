@@ -20,7 +20,7 @@ public class EnemyUnit : Unit
         */
         Ability = new Unit_Ablity(Data);
         Animation = new Unit_Animation(this);
-        Ui = gameObject.AddComponent<Unit_Ui>();
+        //Ui = gameObject.AddComponent<Unit_Ui>();
         /*
         Buff = gameObject.AddComponent<Unit_Buff>();
         if (Data.Passive != null)

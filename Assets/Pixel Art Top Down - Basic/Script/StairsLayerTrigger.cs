@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,8 +36,8 @@ namespace Cainos.PixelArtTopDown_Basic
             if (direction == Direction.East && other.transform.position.x > transform.position.x) SetLayerAndSortingLayer(other.gameObject, layerLower, sortingLayerLower);
         }
 
-        private void SetLayerAndSortingLayer( GameObject target, string layer, string sortingLayer )
-        {
+        private void SetLayerAndSortingLayer(GameObject target, string layer, string sortingLayer)
+        {           
             target.layer = LayerMask.NameToLayer(layer);
 
             target.GetComponent<SpriteRenderer>().sortingLayerName = sortingLayer;
@@ -54,6 +54,6 @@ namespace Cainos.PixelArtTopDown_Basic
             South,
             West,
             East
-        }    
+        }
     }
 }

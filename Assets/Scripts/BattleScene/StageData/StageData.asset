@@ -15,4 +15,8 @@ MonoBehaviour:
   Type: 2
   Name: test
   Description: test
-  mData: {fileID: 11400000, guid: c044ac716c1b55d45aa3eefde17aee48, type: 2}
+  MapData: {fileID: 3080845570954043530, guid: 1997a7f187853174cb0898b98f62110b, type: 3}
+  EnemyUnitData:
+  - {fileID: 11400000, guid: 5613d79340c2d27428df60bc9c00ea73, type: 2}
+  - {fileID: 11400000, guid: 5613d79340c2d27428df60bc9c00ea73, type: 2}
+  - {fileID: 11400000, guid: 5613d79340c2d27428df60bc9c00ea73, type: 2}

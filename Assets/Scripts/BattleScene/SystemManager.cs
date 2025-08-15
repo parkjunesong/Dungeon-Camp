@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 public class SystemManager : MonoBehaviour
 {
@@ -18,8 +19,10 @@ public class SystemManager : MonoBehaviour
 
     void Start()
     {
-        //StageData = Instantiate(StageManager.Instance.StageData);
-        //DeckData = Instantiate(StageManager.Instance.DeckData);   
+        StageData = Instantiate(StageManager.Instance.StageData);
+        DeckData = Instantiate(StageManager.Instance.DeckData);   
+        StageData.MapData = Instantiate(StageData.MapData, new Vector2(0, 0), Quaternion.identity);
+
         BattleManager.Instance.BattleStart();           
     }  
 }

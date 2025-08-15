@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class UnitSpawnManager : MonoBehaviour
 {
@@ -14,10 +15,14 @@ public class UnitSpawnManager : MonoBehaviour
         Instance = this;
     }
 
-    public void Spawn(UnitData data, Vector2 xy, string team)
-    {
-        UnitData uData = Instantiate(data);
-        GameObject UnitGameObject = Instantiate(origin, new Vector2(xy.x, xy.y), Quaternion.identity);
+    public void Spawn(UnitData data, Tilemap groundTilemap, Vector3Int spawnTilePos, string team)
+    {   
+        Vector3 worldPos = groundTilemap.GetCellCenterWorld(spawnTilePos);
+        GameObject UnitGameObject = Instantiate(origin, worldPos, Quaternion.identity);
+
+        SpriteRenderer sr = UnitGameObject.GetComponentInChildren<SpriteRenderer>();
+        sr.sortingLayerName = groundTilemap.GetComponent<TilemapRenderer>().sortingLayerName;
+        sr.sortingOrder = groundTilemap.GetComponent<TilemapRenderer>().sortingOrder + 1;
 
         if (team == "Player")
             UnitGameObject.AddComponent<PlayerUnit>();
@@ -25,7 +30,7 @@ public class UnitSpawnManager : MonoBehaviour
             UnitGameObject.AddComponent<EnemyUnit>();
 
         Unit unit = UnitGameObject.GetComponent<Unit>();
-        unit.Data = uData;
+        unit.Data = Instantiate(data);
         unit.Init();
         unit.Ability.Team = team;
         unit.name = unit.Ability.Name;
@@ -35,4 +40,5 @@ public class UnitSpawnManager : MonoBehaviour
         else if (team == "Enemy")
             BattleManager.Instance.EnemyUnits.Add(unit);
     }
+    
 }
