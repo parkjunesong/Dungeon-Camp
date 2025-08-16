@@ -22,7 +22,7 @@ public class UnitSpawnManager : MonoBehaviour
 
         SpriteRenderer sr = UnitGameObject.GetComponentInChildren<SpriteRenderer>();
         sr.sortingLayerName = groundTilemap.GetComponent<TilemapRenderer>().sortingLayerName;
-        sr.sortingOrder = groundTilemap.GetComponent<TilemapRenderer>().sortingOrder + 1;
+        sr.sortingOrder = groundTilemap.GetComponent<TilemapRenderer>().sortingOrder + 10;
 
         if (team == "Player")
             UnitGameObject.AddComponent<PlayerUnit>();

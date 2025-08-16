@@ -18,7 +18,7 @@ public class CostManager : MonoBehaviour
         Cost = 3; // 임시로 3개. 턴마다 늘어나는것 구현 예정
         uiReset();
     }
-    
+
     public bool IsCostAvailable(int cost)
     {
         if (Cost >= cost)
@@ -32,11 +32,11 @@ public class CostManager : MonoBehaviour
 
     public void uiReset()
     {
-        for(int i = 0; i < Cost; i++)
+        for (int i = 0; i < Cost; i++)
         {
             CostUi.GetComponentsInChildren<Image>()[i + 1].color = new Color32(100, 255, 255, 255);
         }
-        for(int i = Cost; i < 10; i++)
+        for (int i = Cost; i < 10; i++)
         {
             CostUi.GetComponentsInChildren<Image>()[i + 1].color = new Color32(255, 255, 255, 255);
         }

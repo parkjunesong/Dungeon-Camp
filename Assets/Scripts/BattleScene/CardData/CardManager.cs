@@ -10,7 +10,7 @@ public class CardManager : MonoBehaviour
     public static CardManager Instance { get; private set; }
 
     public GameObject CardUi;
-    public List<Card_Base> Deck;
+    public List<Card_Base> Deck = new();
     public List<Card_Base> Hand = new();
 
     void Awake()
@@ -19,7 +19,7 @@ public class CardManager : MonoBehaviour
         Instance = this;
 
         CardUi = gameObject;
-        Deck = new List<Card_Base>(SystemManager.Instance.DeckData.Cards);
+        //Deck = new List<Card_Base>(SystemManager.Instance.DeckData.Cards);
 
         ShuffleCard(Deck);
         for (int i = 0; i < 5; i++) DrawCard();
@@ -28,7 +28,7 @@ public class CardManager : MonoBehaviour
     {
         if (Hand.Count > i)
         {
-            Card_Base card = Hand[i].GetComponent<Card_Base>();           
+            Card_Base card = Hand[i];        
             if (CostManager.Instance.IsCostAvailable(card.Card_Cost))
             {
                 card.Execute();

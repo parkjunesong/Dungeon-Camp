@@ -459,7 +459,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3487eba49ce48f546bb7fb8aabe9953a, type: 2}
   - {fileID: 11400000, guid: 3487eba49ce48f546bb7fb8aabe9953a, type: 2}
   - {fileID: 11400000, guid: 3487eba49ce48f546bb7fb8aabe9953a, type: 2}
-  Cards: []
+  Cards:
+  - {fileID: 11400000, guid: e228ec4511951454b9da98318bfec061, type: 2}
+  - {fileID: 11400000, guid: e228ec4511951454b9da98318bfec061, type: 2}
+  - {fileID: 11400000, guid: e228ec4511951454b9da98318bfec061, type: 2}
+  - {fileID: 11400000, guid: e228ec4511951454b9da98318bfec061, type: 2}
+  - {fileID: 11400000, guid: e228ec4511951454b9da98318bfec061, type: 2}
 --- !u!4 &426625579
 Transform:
   m_ObjectHideFlags: 0
@@ -877,7 +882,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 749542557}
         m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
-        m_MethodName: UseCardNo
+        m_MethodName: UseCardFromHand
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1320,11 +1325,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardUi: {fileID: 0}
   Deck:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: e228ec4511951454b9da98318bfec061, type: 2}
+  - {fileID: 11400000, guid: e228ec4511951454b9da98318bfec061, type: 2}
+  - {fileID: 11400000, guid: e228ec4511951454b9da98318bfec061, type: 2}
+  - {fileID: 11400000, guid: e228ec4511951454b9da98318bfec061, type: 2}
+  - {fileID: 11400000, guid: e228ec4511951454b9da98318bfec061, type: 2}
   Hand: []
 --- !u!1 &799535266
 GameObject:
@@ -1411,7 +1416,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 749542557}
         m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
-        m_MethodName: UseCardNo
+        m_MethodName: UseCardFromHand
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1684,6 +1689,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5564ca656eae0429594a6d5456612f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cost: 0
+  CostUi: {fileID: 0}
 --- !u!1 &1467172725
 GameObject:
   m_ObjectHideFlags: 0
@@ -1844,7 +1851,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 749542557}
         m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
-        m_MethodName: UseCardNo
+        m_MethodName: UseCardFromHand
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2379,7 +2386,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 749542557}
         m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
-        m_MethodName: UseCardNo
+        m_MethodName: UseCardFromHand
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2514,6 +2521,7 @@ GameObject:
   - component: {fileID: 1797649155}
   - component: {fileID: 1797649157}
   - component: {fileID: 1797649156}
+  - component: {fileID: 1797649158}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2580,6 +2588,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StageData: {fileID: 0}
   DeckData: {fileID: 0}
+--- !u!114 &1797649158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797649151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95835dceb07176c48af7599c100985e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackHighlightPrefab: {fileID: 6724191175642932002, guid: 4844af8022a3ec44ea38e9c2f7f301d9,
+    type: 3}
+  effectHighlightPrefab: {fileID: 6724191175642932002, guid: 443c6385c41d429438bf35fa9516b07b,
+    type: 3}
+  poolSize: 50
 --- !u!1 &1926572680
 GameObject:
   m_ObjectHideFlags: 0
@@ -2740,7 +2765,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 749542557}
         m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
-        m_MethodName: UseCardNo
+        m_MethodName: UseCardFromHand
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

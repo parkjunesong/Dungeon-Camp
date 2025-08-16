@@ -7,9 +7,7 @@ public abstract class Card_Base : ScriptableObject
     public int Card_Cost;
     public string Card_Name;
     public Sprite Card_Icon;
-    public List<Effect_Base> EffectList = new();      
-
-    public abstract void SetEffect();
+    public List<Effect_Base> EffectList = new();
     public virtual bool IsAvailable() { return true; }
     public abstract void Execute();
 }
