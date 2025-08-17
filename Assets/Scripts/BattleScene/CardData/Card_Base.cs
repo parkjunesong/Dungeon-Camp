@@ -9,5 +9,6 @@ public abstract class Card_Base : ScriptableObject
     public Sprite Card_Icon;
     public List<Effect_Base> EffectList = new();
     public virtual bool IsAvailable() { return true; }
+    public abstract void SetEffect();
     public abstract void Execute();
 }

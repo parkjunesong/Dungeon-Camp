@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.WSA;
 
-public class EffectPreview : MonoBehaviour
+public class EffectPreviewManager : MonoBehaviour
 {
-    public static EffectPreview Instance;
+    public static EffectPreviewManager Instance;
 
     public GameObject attackHighlightPrefab;   // 공격 사거리용
     public GameObject effectHighlightPrefab;   // 효과 범위용
@@ -16,8 +17,6 @@ public class EffectPreview : MonoBehaviour
     private Queue<GameObject> effectPool = new();
     private List<GameObject> activeAttackHighlights = new();
     private List<GameObject> activeEffectHighlights = new();
-
-    private Coroutine targetingCoroutine;
 
     void Awake()
     {
@@ -55,48 +54,67 @@ public class EffectPreview : MonoBehaviour
         pool.Enqueue(obj);
     }
 
-
-
-
-    public void StartTargeting(Unit caster, Effect_Base effect, Camera cam, Tilemap groundTilemap)
+    public void StartTargeting(Effect_Base effect, EffectType type, Vector3 casterWorldPos, Tilemap groundTilemap)
     {
-        if (targetingCoroutine != null) StopCoroutine(targetingCoroutine);
-        targetingCoroutine = StartCoroutine(TargetingCoroutine(caster, effect, cam, groundTilemap));
+        StartCoroutine(TargetingRoutine(effect, type, casterWorldPos, groundTilemap));
     }
 
-    IEnumerator TargetingCoroutine(Unit caster, Effect_Base effect, Camera cam, Tilemap groundTilemap)
+    private IEnumerator TargetingRoutine(Effect_Base effect, EffectType type, Vector3 casterWorldPos, Tilemap groundTilemap)
     {
-        Vector3Int casterTile = groundTilemap.WorldToCell(caster.transform.position);
-
-        ShowAttackRange(casterTile, effect.Attack_Range, groundTilemap); // 유닛 사거리 표시
-
         while (true)
         {
-            Vector3 mouseScreenPos = Input.mousePosition;
-            mouseScreenPos.z = -cam.transform.position.z;
-            Vector3Int mouseTile = groundTilemap.WorldToCell(cam.ScreenToWorldPoint(mouseScreenPos));
+            Vector3 mouseScreenPos = Input.mousePosition; mouseScreenPos.z = -Camera.main.transform.position.z;
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
+            Vector3Int mouseTile = groundTilemap.WorldToCell(mouseWorldPos);
+            Vector3Int casterTile = groundTilemap.WorldToCell(casterWorldPos);
 
-            if (Vector3Int.Distance(casterTile, mouseTile) <= effect.Attack_Range)
+            switch (type)
             {
-                ShowEffectRange(mouseTile, effect.Effect_Range, groundTilemap);
+                case EffectType.SetUnit:
+                    {
+                        if (Vector3Int.Distance(casterTile, mouseTile) <= effect.Attack_Range)
+                        {
+                            ShowEffectRange(mouseTile, effect.Effect_Range, groundTilemap);
+                        }
+                        else
+                        {
+                            ShowAttackRange(casterTile, effect.Attack_Range, groundTilemap);
+                            ClearEffectRange();
+                        }
+                        break;
+                    }
+                case EffectType.SetArea:
+                    {
+                        break;
+                    }
+                case EffectType.Projectile:
+                    {
+                        Vector3 diff = mouseWorldPos - casterWorldPos;
 
-                if (Input.GetMouseButtonDown(0))
-                {
-                    // skill.Execute(caster, mouseTile, groundTilemap);
-                    ClearAll();
-                    targetingCoroutine = null;
-                    yield break;
-                }
+                        Vector3Int dir;
+                        if (Mathf.Abs(diff.x) > Mathf.Abs(diff.y))
+                        {
+                            dir = (diff.x > 0) ? Vector3Int.right : Vector3Int.left;
+                        }
+                        else
+                        {
+                            dir = (diff.y > 0) ? Vector3Int.up : Vector3Int.down;
+                        }
+
+                        ShowProjectilePath(casterTile, dir, effect.Attack_Range, groundTilemap);
+                        break;
+                    }          
             }
-            else
+            if (Input.GetMouseButtonDown(0))
             {
-                ShowAttackRange(casterTile, effect.Attack_Range, groundTilemap);
-                ClearEffectRange();
+                effect.Execute();
+                ClearAll();
+                yield break;
             }
-
             yield return null;
         }
     }
+
     public void ShowAttackRange(Vector3Int centerTile, int range, Tilemap groundTilemap)
     {
         ClearAttackRange();
@@ -143,6 +161,25 @@ public class EffectPreview : MonoBehaviour
                     activeEffectHighlights.Add(obj);
                 }
             }
+        }
+    }
+    private void ShowProjectilePath(Vector3Int centerTile, Vector3Int dir, int range, Tilemap groundTilemap)
+    {
+        ClearEffectRange();
+
+        for (int i = 1; i <= range; i++)
+        {
+            Vector3Int checkTile = centerTile + dir * i;
+            Vector3 worldPos = groundTilemap.GetCellCenterWorld(checkTile);
+
+            GameObject obj = GetFromPool(effectPool, effectHighlightPrefab);
+            SpriteRenderer sr = obj.GetComponentInChildren<SpriteRenderer>();
+
+            obj.transform.position = worldPos;
+            sr.sortingLayerName = groundTilemap.GetComponent<TilemapRenderer>().sortingLayerName;
+            sr.sortingOrder = groundTilemap.GetComponent<TilemapRenderer>().sortingOrder + 2;
+
+            activeEffectHighlights.Add(obj);
         }
     }
 

@@ -21,6 +21,8 @@ public class CardManager : MonoBehaviour
         CardUi = gameObject;
         //Deck = new List<Card_Base>(SystemManager.Instance.DeckData.Cards);
 
+        //foreach (Card_Base card in Deck) card.SetEffect();
+
         ShuffleCard(Deck);
         for (int i = 0; i < 5; i++) DrawCard();
     }

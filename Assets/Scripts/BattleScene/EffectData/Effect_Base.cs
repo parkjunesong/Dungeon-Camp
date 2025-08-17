@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using static UnityEngine.GraphicsBuffer;
 
 public enum EffectTarget { Player, Enemy };
@@ -23,33 +24,5 @@ public abstract class Effect_Base
         Effect_Target = target;
         Effect_Type = type;
     }
-    public abstract void Execute();
-
-    /*
-    public List<Unit> setTarget(Unit target) // 효과 대상 탐색
-    {
-        if (Effect_Type == EffectType.Projectile)
-        {
-
-        }
-        else if (Effect_Type == EffectType.SetArea)
-        {
-
-        }
-        else if (Effect_Type == EffectType.SetUnit)
-        {
-            
-        }
-        else return null;
-
-        if (Effect_Target == EffectTarget.Enemy)
-        {
-            
-        }
-        else if (Effect_Target == EffectTarget.Player)
-        {
-            
-        }
-    }
-    */
+    public abstract void Execute();   
 }
