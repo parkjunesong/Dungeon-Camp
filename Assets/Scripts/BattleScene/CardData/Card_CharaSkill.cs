@@ -16,9 +16,8 @@ public class Card_CharaSkill : Card_Base
     public override void Execute()
     {
         caster = BattleManager.Instance.alivePlayerUnits[0];
-        effect = new Effect_Damage(1, 12, 1, EffectTarget.Enemy, EffectType.SetUnit, EffectPriority.Farest);
-        tile = SystemManager.Instance.StageData.MapData.GetComponent<MapData>().Layers[0].Tilemap[0];
+        effect = new Effect_Damage(1, 4, 1, EffectTarget.Enemy, EffectType.SetTarget, EffectPriority.None);
 
-        EffectPreviewManager.Instance.StartTargeting(caster, effect, tile);
+        EffectPreviewManager.Instance.StartTargeting(caster, effect, caster.groundTilemap);
     }
 }

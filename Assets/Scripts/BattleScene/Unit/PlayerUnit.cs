@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlayerUnit : Unit
 {
@@ -17,8 +18,11 @@ public class PlayerUnit : Unit
         }
         Skill = new Unit_Skill(Skills);
         */
+
         Ability = new Unit_Ablity(Data);
         Animation = new Unit_Animation(this);
+        ActionController = gameObject.AddComponent<Unit_Action>();
+        ActionController.Initialize();
         Ui = gameObject.AddComponent<Unit_Ui>();
         Ui.Initialize();
         /*

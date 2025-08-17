@@ -30,6 +30,7 @@ public class UnitSpawnManager : MonoBehaviour
             UnitGameObject.AddComponent<EnemyUnit>();
 
         Unit unit = UnitGameObject.GetComponent<Unit>();
+        unit.groundTilemap = groundTilemap;
         unit.Data = Instantiate(data);
         unit.Init();
         unit.Ability.Team = team;

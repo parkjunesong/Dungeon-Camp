@@ -16,10 +16,10 @@ MonoBehaviour:
   Class: class
   AT: 10
   AS: 10
-  HP: 10
+  HP: 100
   DF: 10
-  AR: 10
-  MS: 10
+  AR: 2
+  MS: 2
   CR: 10
   CD: 10
   Face: {fileID: -8357373452800408170, guid: e1e78c763e3e4b545a98c87a150c7533, type: 3}

@@ -20,6 +20,8 @@ public class EnemyUnit : Unit
         */
         Ability = new Unit_Ablity(Data);
         Animation = new Unit_Animation(this);
+        ActionController = gameObject.AddComponent<Unit_Action>();
+        ActionController.Initialize();
         Ui = gameObject.AddComponent<Unit_Ui>();
         Ui.Initialize();
         /*

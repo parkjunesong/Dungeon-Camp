@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.WSA;
-using static UnityEngine.GraphicsBuffer;
+
 
 public class EffectPreviewManager : MonoBehaviour
 {
@@ -62,7 +60,7 @@ public class EffectPreviewManager : MonoBehaviour
 
     private IEnumerator TargetingRoutine(Unit caster, Effect_Base effect, Tilemap groundTilemap)
     {
-        List<Unit> units = new();
+        List<Vector3Int> TargetTilePos = new();
         Vector3Int casterTile = groundTilemap.WorldToCell(caster.transform.position);
         Vector3Int lastmouseTile = groundTilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
@@ -70,7 +68,7 @@ public class EffectPreviewManager : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                effect.Execute(caster, units);
+                effect.Execute(caster, TargetTilePos);
                 ClearAll();
                 yield break;
             }
@@ -85,12 +83,12 @@ public class EffectPreviewManager : MonoBehaviour
 
                 switch (effect.Effect_Type)
                 {
-                    case EffectType.SetUnit:
+                    case EffectType.SetTarget:
                         {
                             ShowAttackRange(casterTile, effect.Attack_Range, groundTilemap);
                             if (Vector3Int.Distance(casterTile, mouseTile) <= effect.Attack_Range)
                             {
-                                units = ShowEffectRange(mouseTile, effect.Effect_Range, groundTilemap, effect.Effect_Target);
+                                TargetTilePos = ShowEffectRange(mouseTile, effect.Effect_Range, groundTilemap);
                             }
                             break;
                         }
@@ -105,7 +103,7 @@ public class EffectPreviewManager : MonoBehaviour
                             if (Mathf.Abs(diff.x) > Mathf.Abs(diff.y)) dir = (diff.x > 0) ? Vector3Int.right : Vector3Int.left;
                             else dir = (diff.y > 0) ? Vector3Int.up : Vector3Int.down;
 
-                            units = ShowProjectilePath(casterTile, dir, effect.Attack_Range, groundTilemap, effect.Effect_Target);
+                            TargetTilePos = ShowProjectilePath(casterTile, dir, effect.Attack_Range, groundTilemap);
                             break;
                         }
                 }
@@ -114,7 +112,7 @@ public class EffectPreviewManager : MonoBehaviour
         }          
     }
 
-    private void ShowAttackRange(Vector3Int centerTile, int range, Tilemap groundTilemap)
+    public void ShowAttackRange(Vector3Int centerTile, int range, Tilemap groundTilemap)
     {
         ClearAttackRange();
 
@@ -138,10 +136,10 @@ public class EffectPreviewManager : MonoBehaviour
             }
         }
     }
-    private List<Unit> ShowEffectRange(Vector3Int centerTile, int range, Tilemap groundTilemap, EffectTarget target)
+    private List<Vector3Int> ShowEffectRange(Vector3Int centerTile, int range, Tilemap groundTilemap)
     {
         ClearEffectRange();
-        List<Unit> units = new();
+        List<Vector3Int> TargetTilePos = new();
 
         for (int x = -range; x <= range; x++)
         {
@@ -160,25 +158,16 @@ public class EffectPreviewManager : MonoBehaviour
                     sr.sortingOrder = groundTilemap.GetComponent<TilemapRenderer>().sortingOrder + 2;
                     activeEffectHighlights.Add(obj);
 
-                    if (target == EffectTarget.Enemy)
-                    {
-                        foreach (var unit in BattleManager.Instance.EnemyUnits)
-                            if (groundTilemap.WorldToCell(unit.transform.position) == checkTile) units.Add(unit);
-                    }
-                    else if (target == EffectTarget.Player)
-                    {
-                        foreach (var unit in BattleManager.Instance.alivePlayerUnits)
-                            if (groundTilemap.WorldToCell(unit.transform.position) == checkTile) units.Add(unit);
-                    }
+                    TargetTilePos.Add(checkTile);                   
                 }
             }
         }
-        return units;
+        return TargetTilePos;
     }
-    private List<Unit> ShowProjectilePath(Vector3Int centerTile, Vector3Int dir, int range, Tilemap groundTilemap, EffectTarget target)
+    private List<Vector3Int> ShowProjectilePath(Vector3Int centerTile, Vector3Int dir, int range, Tilemap groundTilemap)
     {
         ClearEffectRange();
-        List<Unit> units = new ();
+        List<Vector3Int> TargetTilePos = new();
 
         for (int i = 1; i <= range; i++)
         {
@@ -191,18 +180,9 @@ public class EffectPreviewManager : MonoBehaviour
             sr.sortingOrder = groundTilemap.GetComponent<TilemapRenderer>().sortingOrder + 2;
             activeEffectHighlights.Add(obj);
 
-            if(target == EffectTarget.Enemy)
-            {
-                foreach (var unit in BattleManager.Instance.EnemyUnits)
-                    if (groundTilemap.WorldToCell(unit.transform.position) == checkTile) units.Add(unit);
-            }
-            else if(target == EffectTarget.Player)
-            {
-                foreach (var unit in BattleManager.Instance.alivePlayerUnits)
-                    if (groundTilemap.WorldToCell(unit.transform.position) == checkTile) units.Add(unit);                                
-            }     
+            TargetTilePos.Add(checkTile);
         }
-        return units;
+        return TargetTilePos;
     }
 
     public void ClearAttackRange()

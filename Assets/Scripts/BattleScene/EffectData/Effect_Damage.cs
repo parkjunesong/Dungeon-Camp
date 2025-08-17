@@ -7,10 +7,9 @@ public class Effect_Damage : Effect_Base
 {
     public Effect_Damage(float value, int attackrange, int effectrange, EffectTarget target, EffectType type, EffectPriority priority = EffectPriority.None) : base(value, attackrange, effectrange, target, type, priority) { }
 
-    public override void Execute(Unit caster, List<Unit> targets)
+    public override void Execute(Unit caster, List<Vector3Int> TargetTilePos)
     {
-        
-        foreach (var target in setPriority(targets))
+        foreach (var target in FindTarget(setPriority(TargetTilePos)))
         {
             target.OnDamaged(getDamage(caster));
         }    

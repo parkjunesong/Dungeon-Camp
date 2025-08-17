@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public abstract class Unit : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public abstract class Unit : MonoBehaviour
     public Unit_Ablity Ability;
     public Unit_Animation Animation;
     public Unit_Ui Ui;
+    public Unit_Action ActionController;
+    public Tilemap groundTilemap;
 
     public abstract void Init();
     public abstract void TurnStart();

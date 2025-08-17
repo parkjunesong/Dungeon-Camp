@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Unit_Ui : MonoBehaviour
 {
     private Canvas mainCanvas;
+    public Transform ActionSelector;
     private Transform Info;
     private Slider HpBar;
     private Slider ShildBar;
@@ -14,8 +15,14 @@ public class Unit_Ui : MonoBehaviour
     public void Initialize()
     {
         mainCanvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-        Info = Instantiate(Resources.Load<Transform>("Info"), mainCanvas.transform);
 
+        ActionSelector = Instantiate(Resources.Load<Transform>("ActionSelectorUi"), mainCanvas.transform);
+        ActionSelector.GetChild(0).GetComponent<Button>().onClick.AddListener(transform.GetComponent<Unit_Action>().Move);
+        ActionSelector.GetChild(1).GetComponent<Button>().onClick.AddListener(transform.GetComponent<Unit_Action>().NormalAttack);
+        ActionSelector.GetChild(2).GetComponent<Button>().onClick.AddListener(transform.GetComponent<Unit_Action>().Skill);
+        ActionSelector.gameObject.SetActive(false);
+
+        Info = Instantiate(Resources.Load<Transform>("Info"), mainCanvas.transform);
         HpBar = Info.GetChild(0).GetComponent<Slider>();
         ShildBar = Info.GetChild(1).GetComponent<Slider>();
         BuffSlot = Info.GetChild(2).GetComponent<RectTransform>();
@@ -24,17 +31,28 @@ public class Unit_Ui : MonoBehaviour
     }
     public void UpdateUiPos()
     {
-        Vector3 worldPos = transform.position + new Vector3(0, -0.5f, 0);
-
+        Info.localPosition = localPosChanger(transform.position + new Vector3(0, -0.5f, 0));
+        ActionSelector.localPosition = localPosChanger(transform.position + new Vector3(0, 0.25f, 0));
+    }
+    public Vector3 localPosChanger(Vector3 pos)
+    {
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            mainCanvas.transform as RectTransform, 
-            Camera.main.WorldToScreenPoint(worldPos),
+            mainCanvas.transform as RectTransform,
+            Camera.main.WorldToScreenPoint(pos),
             mainCanvas.renderMode == RenderMode.ScreenSpaceCamera ? Camera.main : null,
             out Vector2 localPos
         );
-        Info.localPosition = localPos;
+        return localPos;
     }
 
+    public void ShowActionSelector(bool isActivate)
+    {
+        ActionSelector.gameObject.SetActive(isActivate);
+    }
+    public void ShowInfo(bool isActivate)
+    {
+        Info.gameObject.SetActive(isActivate);
+    }
     public void UpdateHPBar(int inGame, int inData)
     {
         HpBar.value = (float)inGame / inData;
