@@ -5,14 +5,12 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Effect_Damage : Effect_Base
 {
-    public Effect_Damage(float value, int attackrange, int effectrange, EffectTarget target, EffectType type) : base(value, attackrange, effectrange, target, type)
-    {
-
-    }
+    public Effect_Damage(float value, int attackrange, int effectrange, EffectTarget target, EffectType type, EffectPriority priority = EffectPriority.None) : base(value, attackrange, effectrange, target, type, priority) { }
 
     public override void Execute(Unit caster, List<Unit> targets)
     {
-        foreach (var target in targets)
+        
+        foreach (var target in setPriority(targets))
         {
             target.OnDamaged(getDamage(caster));
         }    
