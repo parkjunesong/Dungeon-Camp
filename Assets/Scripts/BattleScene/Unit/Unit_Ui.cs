@@ -1,25 +1,40 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Playables;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class Unit_Ui : MonoBehaviour
 {
+    private Canvas mainCanvas;
+    private Transform Info;
     private Slider HpBar;
     private Slider ShildBar;
-    //private RectTransform BuffSlot;
-    private Transform unitCanvas;
+    private RectTransform BuffSlot;
 
-    void Awake()
+    public void Initialize()
     {
-        unitCanvas = transform.GetChild(0);
+        mainCanvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        Info = Instantiate(Resources.Load<Transform>("Info"), mainCanvas.transform);
 
-        HpBar = unitCanvas.GetChild(0).GetComponent<Slider>();
-        //ShildBar = unitCanvas.GetChild(0).GetChild(1).GetComponent<Slider>();
-        //BuffSlot = unitCanvas.GetChild(0).GetChild(2).GetComponent<RectTransform>();       
+        HpBar = Info.GetChild(0).GetComponent<Slider>();
+        ShildBar = Info.GetChild(1).GetComponent<Slider>();
+        BuffSlot = Info.GetChild(2).GetComponent<RectTransform>();
+
+        UpdateUiPos();
     }
+    public void UpdateUiPos()
+    {
+        Vector3 worldPos = transform.position + new Vector3(0, -0.5f, 0);
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            mainCanvas.transform as RectTransform, 
+            Camera.main.WorldToScreenPoint(worldPos),
+            mainCanvas.renderMode == RenderMode.ScreenSpaceCamera ? Camera.main : null,
+            out Vector2 localPos
+        );
+        Info.localPosition = localPos;
+    }
+
     public void UpdateHPBar(int inGame, int inData)
     {
         HpBar.value = (float)inGame / inData;
@@ -75,40 +90,5 @@ public class Unit_Ui : MonoBehaviour
             iconIndex++;
         }
     }
-    */
-    public void ShowFloatingText(string text, Color color)
-    {
-        GameObject obj = FloatingTextPool.Instance.Get();
-        obj.transform.SetParent(unitCanvas);
-
-        int activeTextCount = unitCanvas.childCount;
-        obj.transform.position = transform.position + new Vector3(0, 150 + (30f * activeTextCount), 0);
-
-        Text txt = obj.GetComponentInChildren<Text>();
-        txt.text = text;
-        txt.color = color;
-
-        StartCoroutine(AnimateText(obj));
-    }
-    private IEnumerator AnimateText(GameObject obj, float duration = 1f)
-    {
-        CanvasGroup group = obj.GetComponent<CanvasGroup>();
-        RectTransform rect = obj.GetComponent<RectTransform>();
-
-        Vector3 start = rect.anchoredPosition;
-        Vector3 end = start + new Vector3(0, 30, 0);
-
-        float t = 0f;
-        while (t < 1f)
-        {
-            t += Time.deltaTime / duration;
-
-            rect.anchoredPosition = Vector3.Lerp(start, end, t);
-            if (group != null)
-                group.alpha = 1f - t;
-
-            yield return null;
-        }
-        FloatingTextPool.Instance.Return(obj);
-    }
+    */ 
 }

@@ -24,5 +24,5 @@ public abstract class Effect_Base
         Effect_Target = target;
         Effect_Type = type;
     }
-    public abstract void Execute();   
+    public abstract void Execute(Unit caster, List<Unit> targets);   
 }

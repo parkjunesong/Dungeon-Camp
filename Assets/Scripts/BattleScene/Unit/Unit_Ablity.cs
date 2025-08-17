@@ -50,47 +50,28 @@ public class Unit_Ablity
         Shild = 0;
     }
 
-    public void OnDamaged(Unit unit, float damage, DamageType damagetype, int ignore)
+    public void OnDamaged(Unit unit, float damage)
     {
-        float dam = damage * 100 / (100 + DF * (1f - ignore / 100));
+        float dam = damage * 100 / (100 + DF);
+        FloatingTextManager.Instance.ShowFloatingText(unit.transform, ((int)(dam * (1.0f - RD / 100))).ToString(), Color.red);
 
-        switch (damagetype)
+        if (Shild > 0)
         {
-            case DamageType.Normal:
-                {
-                    unit.Ui.ShowFloatingText(((int)(dam * (1.0f - RD / 100))).ToString(), Color.red);
-
-                    if (Shild > 0)
-                    {
-                        Shild -= (int)(dam * (1.0f - RD / 100));
-                        if (Shild <= 0)
-                        {
-                            HP -= -Shild;
-                            Shild = 0;
-                        }
-                        break;
-                    }
-                    else
-                    {
-                        HP -= (int)(dam * (1.0f - RD / 100));
-                        break;
-                    }
-                }
-            case DamageType.Penetrate:
-                {
-                    unit.Ui.ShowFloatingText(((int)(dam * (1.0f - RD / 100))).ToString(), Color.red);
-
-                    HP -= (int)(dam * (1.0f - RD / 100));
-                    break;
-                }           
+            Shild -= (int)(dam * (1.0f - RD / 100));
+            if (Shild <= 0)
+            {
+                HP -= -Shild;
+                Shild = 0;
+            }
         }
-
-        if (HP <= 0)
-            HP = 0;
+        else
+        {
+            HP -= (int)(dam * (1.0f - RD / 100));
+        }
     }
     public void OnHealed(Unit unit, float heal)
     {
-        unit.Ui.ShowFloatingText(heal.ToString(), Color.green);
+        FloatingTextManager.Instance.ShowFloatingText(unit.transform, heal.ToString(), Color.green);
 
         if (heal + HP < maxHP)
             HP += (int)(heal);
@@ -99,7 +80,7 @@ public class Unit_Ablity
     }
     public void OnShieldGained(Unit unit, float shild)
     {
-        unit.Ui.ShowFloatingText(shild.ToString(), Color.yellow);
+        FloatingTextManager.Instance.ShowFloatingText(unit.transform, shild.ToString(), Color.yellow);
         Shild += (int)(shild);
     }
 

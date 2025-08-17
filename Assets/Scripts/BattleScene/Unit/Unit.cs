@@ -23,9 +23,9 @@ public abstract class Unit : MonoBehaviour
     {
 
     }
-    public void OnDamaged(float damage, DamageType damagetype, int ignore)
+    public void OnDamaged(float damage)
     {
-        Ability.OnDamaged(this, damage, damagetype, ignore);
+        Ability.OnDamaged(this, damage);
         Ui.UpdateHPBar(Ability.HP, Data.HP);
         Ui.UpdateShildBar(Ability.Shild, Ability.maxHP);
 

@@ -22,5 +22,6 @@ MonoBehaviour:
   MS: 10
   CR: 10
   CD: 10
-  Face: {fileID: 21300002, guid: ec47f75fe8aff1644ac73998f4ad31b5, type: 3}
-  Standing: {fileID: 21300002, guid: ec47f75fe8aff1644ac73998f4ad31b5, type: 3}
+  Face: {fileID: 8741012760896139919, guid: 8706449e920f0904dbbcbc2ee48d3119, type: 3}
+  Standing: {fileID: -4834993452986197610, guid: bd9497988afd2dc489422dafb3edfef3,
+    type: 3}

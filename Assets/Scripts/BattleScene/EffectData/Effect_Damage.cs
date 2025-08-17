@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public enum DamageType { Normal, Penetrate };
-
 public class Effect_Damage : Effect_Base
 {
     public Effect_Damage(float value, int attackrange, int effectrange, EffectTarget target, EffectType type) : base(value, attackrange, effectrange, target, type)
@@ -12,14 +10,12 @@ public class Effect_Damage : Effect_Base
 
     }
 
-    public override void Execute()
+    public override void Execute(Unit caster, List<Unit> targets)
     {
-        /*
-        foreach (var target in setTarget(caster))
+        foreach (var target in targets)
         {
-            target.OnDamaged(getDamage(caster), DamageType, IgnoreDefence);
+            target.OnDamaged(getDamage(caster));
         }    
-        */
     }
     public float getDamage(Unit caster)
     {

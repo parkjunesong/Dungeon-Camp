@@ -6,21 +6,19 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu(fileName = "Card_CharaSkill", menuName = "Scriptable Object/Card/CharaSkill")]
 public class Card_CharaSkill : Card_Base
 {
+    Unit caster;
     Effect_Base effect;
-    EffectType type;
     Tilemap tile;
-    Vector3Int casterTile;   
     public override void SetEffect()
     {
         
     }
     public override void Execute()
     {
-        tile = SystemManager.Instance.StageData.MapData.GetComponent<MapData>().Layers[0].Tilemap[0];
-        casterTile = tile.WorldToCell(BattleManager.Instance.alivePlayerUnits[0].transform.position);
+        caster = BattleManager.Instance.alivePlayerUnits[0];
         effect = new Effect_Damage(1, 7, 1, EffectTarget.Enemy, EffectType.SetUnit);
-        type = EffectType.Projectile;
+        tile = SystemManager.Instance.StageData.MapData.GetComponent<MapData>().Layers[0].Tilemap[0];
 
-        EffectPreviewManager.Instance.StartTargeting(effect, type, casterTile, tile);
+        EffectPreviewManager.Instance.StartTargeting(caster, effect, tile);
     }
 }
