@@ -53,6 +53,11 @@ public class EffectPreviewManager : MonoBehaviour
         pool.Enqueue(obj);
     }
 
+
+
+
+
+
     public void StartTargeting(Unit caster, Effect_Base effect, Tilemap groundTilemap)
     {
         StartCoroutine(TargetingRoutine(caster, effect, groundTilemap));
@@ -68,7 +73,7 @@ public class EffectPreviewManager : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                effect.Execute(caster, TargetTilePos);
+                if(TargetTilePos.Count > 0 && IsGroundTiles(TargetTilePos, groundTilemap)) effect.Execute(caster, TargetTilePos);
                 ClearAll();
                 yield break;
             }
@@ -88,7 +93,15 @@ public class EffectPreviewManager : MonoBehaviour
                             ShowAttackRange(casterTile, effect.Attack_Range, groundTilemap);
                             if (Vector3Int.Distance(casterTile, mouseTile) <= effect.Attack_Range)
                             {
-                                TargetTilePos = ShowEffectRange(mouseTile, effect.Effect_Range, groundTilemap);
+                                if (groundTilemap.HasTile(mouseTile))
+                                {
+                                    TargetTilePos = ShowEffectRange(mouseTile, effect.Effect_Range, groundTilemap);
+                                }
+                                else
+                                {
+                                    ClearEffectRange();
+                                    TargetTilePos.Clear();
+                                }
                             }
                             break;
                         }
@@ -183,6 +196,15 @@ public class EffectPreviewManager : MonoBehaviour
             TargetTilePos.Add(checkTile);
         }
         return TargetTilePos;
+    }
+    private bool IsGroundTiles(List<Vector3Int> tiles, Tilemap groundTilemap)
+    {
+        foreach (var tile in tiles)
+        {
+            if (!groundTilemap.HasTile(tile))
+                return false;
+        }
+        return true;
     }
 
     public void ClearAttackRange()

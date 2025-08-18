@@ -12,11 +12,6 @@ public class Effect_Move : Effect_Base
     public override void Execute(Unit caster, List<Vector3Int> TargetTilePos)
     {
         Vector3Int target = setPriority(TargetTilePos)[0];
-
-        if (Effect_Target != EffectTarget.Ground) return;
-        if (target == caster.groundTilemap.WorldToCell(caster.transform.position)) return; // 자신 위치로 이동 불가
-        if (Pathfinding.GetUnitOnTile(target) != null) return; // 유닛 위치로 이동 불가 
-
         caster.Ui.ShowInfo(false);
         caster.Ui.ShowActionSelector(false);
         caster.StartCoroutine(MoveCoroutine(caster, caster.groundTilemap.GetCellCenterWorld(target)));

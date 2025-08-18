@@ -30,13 +30,13 @@ public class PriorityQueue<T>
 
 public static class Pathfinding
 {
-    public static List<Vector3Int> FindPath(Tilemap tilemap, Vector3Int start, Vector3Int goal, Unit movingUnit)
-    {
-        List<Vector3Int> path = new List<Vector3Int>();
-        Dictionary<Vector3Int, Vector3Int> cameFrom = new Dictionary<Vector3Int, Vector3Int>();
-        Dictionary<Vector3Int, int> costSoFar = new Dictionary<Vector3Int, int>();
+    public static List<Vector3Int> FindPath(Tilemap groundTilemap, Vector3Int start, Vector3Int goal, Unit movingUnit)
+    { 
+        List<Vector3Int> path = new();
+        Dictionary<Vector3Int, Vector3Int> cameFrom = new();
+        Dictionary<Vector3Int, int> costSoFar = new();
 
-        PriorityQueue<Vector3Int> frontier = new PriorityQueue<Vector3Int>();
+        PriorityQueue<Vector3Int> frontier = new();
         frontier.Enqueue(start, 0);
 
         cameFrom[start] = start;
@@ -50,21 +50,16 @@ public static class Pathfinding
         while (frontier.Count > 0)
         {
             Vector3Int current = frontier.Dequeue();
-
             if (current == goal) break;
 
             foreach (Vector3Int dir in directions)
             {
                 Vector3Int next = current + dir;
-
-                if (!tilemap.HasTile(next)) continue;
-
-                // 유닛 충돌 체크 (자신 제외)
-                if (GetUnitOnTile(next) != null && GetUnitOnTile(next) != movingUnit)
-                    continue;
+               
+                if (!groundTilemap.HasTile(next)) continue; // 오직 Ground 타일만 통과      
+                if (GetUnitOnTile(next) != null) continue; // 이동 위치에 유닛이 존재하면 차단
 
                 int newCost = costSoFar[current] + 1;
-
                 if (!costSoFar.ContainsKey(next) || newCost < costSoFar[next])
                 {
                     costSoFar[next] = newCost;
@@ -75,17 +70,14 @@ public static class Pathfinding
             }
         }
 
-        // 경로 재구성
         Vector3Int cur = goal;
         while (cur != start)
         {
             path.Insert(0, cur);
             if (cameFrom.ContainsKey(cur))
                 cur = cameFrom[cur];
-            else
-                break;
+            else break; 
         }
-
         return path;
     }
 

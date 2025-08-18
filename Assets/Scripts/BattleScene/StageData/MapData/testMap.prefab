@@ -4994,7 +4994,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1869315837
   m_SortingLayer: 1
-  m_SortingOrder: 100
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -5160,9 +5160,9 @@ MonoBehaviour:
   - {x: -2, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   EnemySpawnPoint:
-  - {x: 2, y: 0, z: 0}
-  - {x: 4, y: 0, z: 0}
-  - {x: 6, y: 0, z: 0}
+  - {x: -4, y: -9, z: 0}
+  - {x: -2, y: -9, z: 0}
+  - {x: 0, y: -9, z: 0}
 --- !u!1 &3351618865005513493
 GameObject:
   m_ObjectHideFlags: 0
