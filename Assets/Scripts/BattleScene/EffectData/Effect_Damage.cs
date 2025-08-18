@@ -5,14 +5,15 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Effect_Damage : Effect_Base
 {
-    public Effect_Damage(float value, int attackrange, int effectrange, EffectTarget target, EffectType type, EffectPriority priority = EffectPriority.None) : base(value, attackrange, effectrange, target, type, priority) { }
+    public Effect_Damage(float value, int attackrange, int effectrange, EffectTarget target, EffectType type, EffectPriority priority = EffectPriority.None, bool isaction = false) : base(value, attackrange, effectrange, target, type, priority, isaction) { }
 
     public override void Execute(Unit caster, List<Vector3Int> TargetTilePos)
     {
         foreach (var target in FindTarget(setPriority(TargetTilePos)))
         {
             target.OnDamaged(getDamage(caster));
-        }    
+        }
+        if(isAction) BattleManager.Instance.UseActionPoint();
     }
     public float getDamage(Unit caster)
     {

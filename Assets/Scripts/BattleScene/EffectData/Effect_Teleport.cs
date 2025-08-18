@@ -5,7 +5,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Effect_Teleport : Effect_Base
 {
-    public Effect_Teleport(float value, int attackrange, int effectrange, EffectTarget target, EffectType type, EffectPriority priority = EffectPriority.None) : base(value, attackrange, effectrange, target, type, priority) { }
+    public Effect_Teleport(float value, int attackrange, int effectrange, EffectTarget target, EffectType type, EffectPriority priority = EffectPriority.None, bool isaction = false) : base(value, attackrange, effectrange, target, type, priority, isaction) { }
 
     public override void Execute(Unit caster, List<Vector3Int> TargetTilePos)
     {
@@ -17,5 +17,7 @@ public class Effect_Teleport : Effect_Base
 
         caster.transform.position = caster.groundTilemap.GetCellCenterWorld(target);
         caster.Ui.UpdateUiPos();
+
+        if (isAction) BattleManager.Instance.UseActionPoint();
     }
 }

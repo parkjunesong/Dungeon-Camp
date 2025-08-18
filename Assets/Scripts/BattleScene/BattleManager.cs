@@ -16,6 +16,9 @@ public class BattleManager : MonoBehaviour
 
     public int Turn;
     GameObject TurnUi;
+    public int ActionPoint;
+    public int MaxActionPoint;
+    GameObject ActionPointUi;
 
     void Awake()
     {
@@ -27,6 +30,9 @@ public class BattleManager : MonoBehaviour
     {
         Turn = 0;
         TurnUi = GameObject.Find("Turn");
+        ActionPoint = 3;
+        MaxActionPoint = 3;
+        ActionPointUi = GameObject.Find("ActionPoint");
         MapData md = SystemManager.Instance.StageData.MapData.GetComponent<MapData>();
         DeckData dd = SystemManager.Instance.DeckData;
 
@@ -49,6 +55,10 @@ public class BattleManager : MonoBehaviour
         TurnUi.GetComponent<Text>().text = Turn + " Turn";
         //gameObject.GetComponent<SkillManager>().uiReset();
 
+        if (Turn % 3 == 0) MaxActionPoint++;
+        ActionPoint = MaxActionPoint;
+        ActionPointUi.GetComponent<Text>().text = ActionPoint + " / "+ MaxActionPoint+" Point";
+
         for (int i = 0; i < PlayerUnits.Count; i++)
         {
             PlayerUnits[i].TurnStart();
@@ -70,7 +80,12 @@ public class BattleManager : MonoBehaviour
         }
         TurnStart();
     }
-      
+    public void UseActionPoint()
+    {
+        ActionPoint--;
+        ActionPointUi.GetComponent<Text>().text = ActionPoint + " / " + MaxActionPoint + " Point";
+        if (ActionPoint <= 0) TurnEnd();
+    }
     public void OnUnitDied(Unit unit)
     {      
         if (unit.Ability.Team == "Player")

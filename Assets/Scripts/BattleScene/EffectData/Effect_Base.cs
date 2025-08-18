@@ -11,6 +11,7 @@ public enum EffectPriority { None, Strongest, Weakest, Nearest, Farest}
 
 public abstract class Effect_Base
 {
+    protected bool isAction;
     public float Effect_Value;
     public int Effect_Range; // 효과 범위
     public int Attack_Range; // caster를 중심으로 반지름
@@ -18,14 +19,15 @@ public abstract class Effect_Base
     public EffectType Effect_Type;
     public EffectPriority Effect_Priority;
 
-    public Effect_Base(float value, int attackrange, int effectrange, EffectTarget target, EffectType type, EffectPriority priority)
-    {
+    public Effect_Base(float value, int attackrange, int effectrange, EffectTarget target, EffectType type, EffectPriority priority, bool isaction = false)
+    {       
         Effect_Value = value;
         Effect_Range = effectrange;
         Attack_Range = attackrange;
         Effect_Target = target;
         Effect_Type = type;
         Effect_Priority = priority;
+        isAction = isaction;
     }
     public abstract void Execute(Unit caster, List<Vector3Int> TargetTilePos);
 

@@ -7,7 +7,7 @@ public class Effect_Move : Effect_Base
 {
     public float moveSpeed = 5f;
 
-    public Effect_Move(float value, int attackrange, int effectrange, EffectTarget target, EffectType type, EffectPriority priority = EffectPriority.None) : base(value, attackrange, effectrange, target, type, priority) { }
+    public Effect_Move(float value, int attackrange, int effectrange, EffectTarget target, EffectType type, EffectPriority priority = EffectPriority.None, bool isaction = false) : base(value, attackrange, effectrange, target, type, priority, isaction) { }
 
     public override void Execute(Unit caster, List<Vector3Int> TargetTilePos)
     {
@@ -41,5 +41,6 @@ public class Effect_Move : Effect_Base
         unit.Ui.ShowInfo(true);
         unit.Ui.ShowActionSelector(true);
         unit.Ui.UpdateUiPos();
+        if (isAction) BattleManager.Instance.UseActionPoint();
     }
 }

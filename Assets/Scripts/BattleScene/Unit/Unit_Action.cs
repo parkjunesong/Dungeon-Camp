@@ -23,38 +23,38 @@ public class Unit_Action : MonoBehaviour
         {
             case UnitClass.Novice:
                 {
-                    attack = new Effect_Damage(0.4f, unit.Ability.AR, 0, effectTarget, EffectType.SetTarget);
+                    attack = new Effect_Damage(0.4f, unit.Ability.AR, 0, effectTarget, EffectType.SetTarget, EffectPriority.None, true);
                     skill = null;
                     break;
                 }
             case UnitClass.Swordsman:
                 {
-                    attack = new Effect_Damage(1f, unit.Ability.AR, 0, effectTarget, EffectType.SetTarget);
+                    attack = new Effect_Damage(1f, unit.Ability.AR, 0, effectTarget, EffectType.SetTarget, EffectPriority.None, true);
                     skill = null;
                     break;
                 }
             case UnitClass.Archer:
                 {
-                    attack = new Effect_Damage(0.8f, unit.Ability.AR, 0, effectTarget, EffectType.Projectile, EffectPriority.Nearest);
+                    attack = new Effect_Damage(0.8f, unit.Ability.AR, 0, effectTarget, EffectType.Projectile, EffectPriority.Nearest, true);
                     skill = null;
                     break;
                 }
             case UnitClass.Rogue:
                 {
-                    attack = new Effect_Damage(0.8f, unit.Ability.AR, 0, effectTarget, EffectType.SetTarget);
+                    attack = new Effect_Damage(0.8f, unit.Ability.AR, 0, effectTarget, EffectType.SetTarget, EffectPriority.None, true);
                     skill = null;
                     break;
                 }
             case UnitClass.Wizard:
                 {
-                    attack = new Effect_Damage(0.75f, unit.Ability.AR, 1, effectTarget, EffectType.SetTarget);
-                    skill = new Effect_Teleport(0, 2, 0, EffectTarget.Ground, EffectType.SetTarget);
+                    attack = new Effect_Damage(0.75f, unit.Ability.AR, 1, effectTarget, EffectType.SetTarget, EffectPriority.None, true);
+                    skill = new Effect_Teleport(0, 2, 0, EffectTarget.Ground, EffectType.SetTarget, EffectPriority.None, true);
                     break;
                 }
             case UnitClass.Shaman:
                 {
-                    attack = new Effect_Damage(0.6f, unit.Ability.AR, 1, effectTarget, EffectType.SetTarget);
-                    skill = new Effect_Teleport(0, 2, 0, EffectTarget.Ground, EffectType.SetTarget);
+                    attack = new Effect_Damage(0.6f, unit.Ability.AR, 1, effectTarget, EffectType.SetTarget, EffectPriority.None, true);
+                    skill = new Effect_Teleport(0, 2, 0, EffectTarget.Ground, EffectType.SetTarget, EffectPriority.None, true);
                     break;
                 }
         }
@@ -62,7 +62,7 @@ public class Unit_Action : MonoBehaviour
 
     public void Move()
     {
-        Effect_Base effect = new Effect_Move(0, unit.Ability.MS, 0, EffectTarget.Ground, EffectType.SetTarget);
+        Effect_Base effect = new Effect_Move(0, unit.Ability.MS, 0, EffectTarget.Ground, EffectType.SetTarget, EffectPriority.None, true);
         EffectPreviewManager.Instance.StartTargeting(unit, effect, unit.groundTilemap);
     }  
     public void NormalAttack()

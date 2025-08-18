@@ -35,7 +35,6 @@ public class CardManager : MonoBehaviour
             {
                 card.Execute();
                 Hand.Remove(Hand[i]);
-                BattleManager.Instance.TurnEnd();
             }
             else
                 Debug.Log("Can't Use Card");
