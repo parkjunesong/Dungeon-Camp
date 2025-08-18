@@ -17,7 +17,7 @@ public class UnitCard : MonoBehaviour
         manager = campFireManager;
 
         nameText.text = unit.Name;
-        classText.text = unit.Class;
+        classText.text = unit.Class.ToString();
     }
 
     public void OnRecruitButtonClicked()

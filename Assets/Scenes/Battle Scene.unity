@@ -457,8 +457,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerUnitData:
   - {fileID: 11400000, guid: 3487eba49ce48f546bb7fb8aabe9953a, type: 2}
-  - {fileID: 11400000, guid: 3487eba49ce48f546bb7fb8aabe9953a, type: 2}
-  - {fileID: 11400000, guid: 3487eba49ce48f546bb7fb8aabe9953a, type: 2}
+  - {fileID: 11400000, guid: 5613d79340c2d27428df60bc9c00ea73, type: 2}
+  - {fileID: 11400000, guid: 9980be63f167d004db1f935ec8564b47, type: 2}
   Cards:
   - {fileID: 11400000, guid: e228ec4511951454b9da98318bfec061, type: 2}
   - {fileID: 11400000, guid: e228ec4511951454b9da98318bfec061, type: 2}

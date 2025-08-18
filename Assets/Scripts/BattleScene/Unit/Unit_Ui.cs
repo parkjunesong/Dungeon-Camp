@@ -19,7 +19,7 @@ public class Unit_Ui : MonoBehaviour
         ActionSelector = Instantiate(Resources.Load<Transform>("ActionSelectorUi"), mainCanvas.transform);
         ActionSelector.GetChild(0).GetComponent<Button>().onClick.AddListener(transform.GetComponent<Unit_Action>().Move);
         ActionSelector.GetChild(1).GetComponent<Button>().onClick.AddListener(transform.GetComponent<Unit_Action>().NormalAttack);
-        ActionSelector.GetChild(2).GetComponent<Button>().onClick.AddListener(transform.GetComponent<Unit_Action>().Skill);
+        ActionSelector.GetChild(2).GetComponent<Button>().onClick.AddListener(transform.GetComponent<Unit_Action>().ClassSkill);
         ActionSelector.gameObject.SetActive(false);
 
         Info = Instantiate(Resources.Load<Transform>("Info"), mainCanvas.transform);

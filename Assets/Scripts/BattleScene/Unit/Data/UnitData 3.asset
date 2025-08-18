@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UnitData 3
   m_EditorClassIdentifier: 
   Name: unit1
-  Class: class
+  Class: 4
   AT: 10
   AS: 10
   HP: 100

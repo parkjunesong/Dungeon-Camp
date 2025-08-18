@@ -19,12 +19,6 @@ public class PlayerUnit : Unit
         Skill = new Unit_Skill(Skills);
         */
 
-        Ability = new Unit_Ablity(Data);
-        Animation = new Unit_Animation(this);
-        ActionController = gameObject.AddComponent<Unit_Action>();
-        ActionController.Initialize();
-        Ui = gameObject.AddComponent<Unit_Ui>();
-        Ui.Initialize();
         /*
         Buff = gameObject.AddComponent<Unit_Buff>();
         if (Data.Passive != null)

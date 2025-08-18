@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Playables;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -32,8 +33,15 @@ public class UnitSpawnManager : MonoBehaviour
         Unit unit = UnitGameObject.GetComponent<Unit>();
         unit.groundTilemap = groundTilemap;
         unit.Data = Instantiate(data);
-        unit.Init();
+        unit.Ability = new Unit_Ablity(unit.Data);
         unit.Ability.Team = team;
+        unit.ActionController = UnitGameObject.AddComponent<Unit_Action>();
+        unit.Ui = UnitGameObject.AddComponent<Unit_Ui>();
+        unit.Animation = new Unit_Animation(unit);     
+
+        unit.ActionController.Initialize();   
+        unit.Ui.Initialize();
+
         unit.name = unit.Ability.Name;
 
         if (team == "Player")

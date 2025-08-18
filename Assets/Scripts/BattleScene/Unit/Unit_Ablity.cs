@@ -20,7 +20,7 @@ public class Unit_Ablity
     public UnitState State;
     public string Team;
     public string Name;
-    public string Class;
+    public UnitClass Class;
     public int AT, AS, HP, AR, MS;
     public float CR, CD;
 
