@@ -6,14 +6,20 @@ using static UnityEngine.GraphicsBuffer;
 public class Effect_Move : Effect_Base
 {
     public float moveSpeed = 5f;
+    private bool useMoveLimit;
 
-    public Effect_Move(float value, int attackrange, int effectrange, EffectTarget target, EffectType type, EffectPriority priority = EffectPriority.None, bool isaction = false) : base(value, attackrange, effectrange, target, type, priority, isaction) { }
+    public Effect_Move(float value, int attackrange, int effectrange, EffectTarget target, EffectType type, EffectPriority priority = EffectPriority.None, bool isaction = false, bool useLimit = false) : base(value, attackrange, effectrange, target, type, priority, isaction)
+    {
+        useMoveLimit = useLimit;
+    }
 
     public override void Execute(Unit caster, List<Vector3Int> TargetTilePos)
     {
         Vector3Int target = setPriority(TargetTilePos)[0];
+
+        if (target == caster.groundTilemap.WorldToCell(caster.transform.position)) return; // 자신 위치로 이동 불가
+
         caster.Ui.ShowInfo(false);
-        caster.Ui.ShowActionSelector(false);
         caster.StartCoroutine(MoveCoroutine(caster, caster.groundTilemap.GetCellCenterWorld(target)));
     }
     private IEnumerator MoveCoroutine(Unit unit, Vector3 targetPos)
@@ -22,10 +28,11 @@ public class Effect_Move : Effect_Base
         Vector3Int endTile = unit.groundTilemap.WorldToCell(targetPos);
         List<Vector3Int> path = Pathfinding.FindPath(unit.groundTilemap, startTile, endTile, unit);
 
-        foreach (Vector3Int tile in path)
+        for(int i = 0; i< path.Count; i++)
         {
-            Vector3 worldPos = unit.groundTilemap.GetCellCenterWorld(tile);
+            if (useMoveLimit && i >= unit.Ability.MS) break;
 
+            Vector3 worldPos = unit.groundTilemap.GetCellCenterWorld(path[i]);
             while ((unit.transform.position - worldPos).sqrMagnitude > 0.01f)
             {
                 unit.transform.position = Vector3.MoveTowards(unit.transform.position, worldPos, moveSpeed * Time.deltaTime);
@@ -34,7 +41,6 @@ public class Effect_Move : Effect_Base
         }
         unit.transform.position = targetPos;
         unit.Ui.ShowInfo(true);
-        unit.Ui.ShowActionSelector(true);
         unit.Ui.UpdateUiPos();
         if (isAction) BattleManager.Instance.UseActionPoint();
     }

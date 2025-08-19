@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TestTools;
 
 public class EnemyUnit : Unit
 {
     int skillNo;
     public int MoveCount;
+    public EffectPriority MovePriority;
     public override void Init()
     {
+        MovePriority = EffectPriority.Nearest;
         /*
         List<Skill_Base> Skills = new List<Skill_Base>();
         foreach (Skill_Base skill in Data.Skills)
@@ -43,17 +46,7 @@ public class EnemyUnit : Unit
         */
     }
     public override void TurnEnd() // 적에게 적용되는 버프의 경우, 턴 계산 고민좀 해야함
-    {       
-        /*
-        if (MoveCount == 0)
-        {
-            OnSkillUsed(skillNo);
-            MoveCount = Skill.SkillList[0].Skill_CoolTime;
-        }
-        Skill.OnTurnEnd();
-        Buff.OnTurnEnd();
-        if (Passive != null)
-            Passive.OnTurnEnd();
-        */
-    }
+    {      
+        ActionController.Move();                                       
+    }    
 }

@@ -99,4 +99,14 @@ public static class Pathfinding
         }
         return null;
     }
+    public static List<Vector3Int> GetPlayerUnitTiles()
+    {
+        List<Vector3Int> tiles = new();
+        foreach (var unit in BattleManager.Instance.alivePlayerUnits)
+        {
+            Vector3Int pos = unit.groundTilemap.WorldToCell(unit.transform.position);
+            tiles.Add(pos);
+        }
+        return tiles;
+    }
 }
