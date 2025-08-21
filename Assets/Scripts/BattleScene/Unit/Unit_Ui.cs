@@ -16,11 +16,15 @@ public class Unit_Ui : MonoBehaviour
     {
         mainCanvas = GameObject.Find("Canvas").GetComponent<Canvas>();
 
-        ActionSelector = Instantiate(Resources.Load<Transform>("ActionSelectorUi"), mainCanvas.transform);
-        ActionSelector.GetChild(0).GetComponent<Button>().onClick.AddListener(transform.GetComponent<Unit_Action>().Move);
-        ActionSelector.GetChild(1).GetComponent<Button>().onClick.AddListener(transform.GetComponent<Unit_Action>().NormalAttack);
-        ActionSelector.GetChild(2).GetComponent<Button>().onClick.AddListener(transform.GetComponent<Unit_Action>().ClassSkill);
-        ActionSelector.gameObject.SetActive(false);
+        if (transform.GetComponent<Unit_Action>() != null)
+        {
+            ActionSelector = Instantiate(Resources.Load<Transform>("ActionSelectorUi"), mainCanvas.transform);
+            ActionSelector.GetChild(0).GetComponent<Button>().onClick.AddListener(transform.GetComponent<Unit_Action>().Move);
+            ActionSelector.GetChild(1).GetComponent<Button>().onClick.AddListener(transform.GetComponent<Unit_Action>().NormalAttack);
+            ActionSelector.GetChild(2).GetComponent<Button>().onClick.AddListener(transform.GetComponent<Unit_Action>().ClassSkill);
+            ActionSelector.gameObject.SetActive(false);
+        }
+        else ActionSelector = null;
 
         Info = Instantiate(Resources.Load<Transform>("Info"), mainCanvas.transform);
         HpBar = Info.GetChild(0).GetComponent<Slider>();
@@ -32,7 +36,8 @@ public class Unit_Ui : MonoBehaviour
     public void UpdateUiPos()
     {
         Info.localPosition = localPosChanger(transform.position + new Vector3(0, -0.5f, 0));
-        ActionSelector.localPosition = localPosChanger(transform.position + new Vector3(0, 0.25f, 0));
+        if (ActionSelector != null)
+            ActionSelector.localPosition = localPosChanger(transform.position + new Vector3(0, 0.25f, 0));
     }
     public Vector3 localPosChanger(Vector3 pos)
     {

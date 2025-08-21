@@ -19,7 +19,7 @@ MonoBehaviour:
   HP: 100
   DF: 10
   AR: 2
-  MS: 2
+  MS: 6
   CR: 10
   CD: 10
   Face: {fileID: 3442835915033108580, guid: 7680e3b178bd5f54f83fc29f2f8dd381, type: 3}

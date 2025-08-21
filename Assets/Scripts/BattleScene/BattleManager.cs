@@ -15,10 +15,12 @@ public class BattleManager : MonoBehaviour
     public List<Unit> deadPlayerUnits = new();
 
     public int Turn;
-    GameObject TurnUi;
+    private GameObject TurnUi;
     public int ActionPoint;
     public int MaxActionPoint;
-    GameObject ActionPointUi;
+    private Unit lastActionedUnit = null;  // 마지막으로 행동한 유닛
+    private int ActionCount = 1; // 연속 행동 기록용
+    private GameObject ActionPointUi;
 
     void Awake()
     {
@@ -51,13 +53,14 @@ public class BattleManager : MonoBehaviour
 
     public void TurnStart()
     {
-        Turn++;
-        TurnUi.GetComponent<Text>().text = Turn + " Turn";
-        //gameObject.GetComponent<SkillManager>().uiReset();
+        lastActionedUnit = null;
 
+        Turn++;
         if (Turn % 3 == 0) MaxActionPoint++;
         ActionPoint = MaxActionPoint;
-        ActionPointUi.GetComponent<Text>().text = ActionPoint + " / "+ MaxActionPoint+" Point";
+
+        TurnUi.GetComponent<Text>().text = Turn + " Turn";
+        ActionPointUi.GetComponent<Text>().text = ActionPoint + " / "+ MaxActionPoint+" Point";      
 
         for (int i = 0; i < PlayerUnits.Count; i++)
         {
@@ -78,13 +81,29 @@ public class BattleManager : MonoBehaviour
         {
             EnemyUnits[i].TurnEnd();
         }
+        StartCoroutine(EnemyMoveSequence());
+
         TurnStart();
     }
-    public void UseActionPoint()
+    private IEnumerator EnemyMoveSequence()
     {
-        ActionPoint--;
+        foreach (var enemy in EnemyUnits)
+        {
+            yield return StartCoroutine(enemy.GetComponent<EnemyUnit>().MoveCoroutine()); // 하나 끝날 때까지 대기
+        }
+    }
+
+    public void UseActionPoint(Unit unit)
+    {
+        if (lastActionedUnit == unit) ActionCount *= 2;
+        else
+        {
+            ActionCount = 1;
+            lastActionedUnit = unit;
+        }
+        ActionPoint-= ActionCount;
         ActionPointUi.GetComponent<Text>().text = ActionPoint + " / " + MaxActionPoint + " Point";
-        if (ActionPoint <= 0) TurnEnd();
+        if (ActionPoint <= 0) TurnEnd();       
     }
     public void OnUnitDied(Unit unit)
     {      

@@ -18,6 +18,6 @@ public class Effect_Teleport : Effect_Base
         caster.transform.position = caster.groundTilemap.GetCellCenterWorld(target);
         caster.Ui.UpdateUiPos();
 
-        if (isAction) BattleManager.Instance.UseActionPoint();
+        if (isAction) BattleManager.Instance.UseActionPoint(caster);
     }
 }

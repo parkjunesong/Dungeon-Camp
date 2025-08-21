@@ -13,7 +13,7 @@ public class Effect_Damage : Effect_Base
         {
             target.OnDamaged(getDamage(caster));
         }
-        if(isAction) BattleManager.Instance.UseActionPoint();
+        if(isAction) BattleManager.Instance.UseActionPoint(caster);
     }
     public float getDamage(Unit caster)
     {

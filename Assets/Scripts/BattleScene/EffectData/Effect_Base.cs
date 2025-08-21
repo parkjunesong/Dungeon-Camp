@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Tilemaps;
-using static UnityEngine.GraphicsBuffer;
 
 public enum EffectTarget { Ground, Player, Enemy };
 public enum EffectType { SetTarget, SetArea, Projectile };

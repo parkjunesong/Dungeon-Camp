@@ -5,7 +5,6 @@ using UnityEngine.Tilemaps;
 public class PriorityQueue<T>
 {
     private List<(T item, int priority)> elements = new List<(T, int)>();
-
     public int Count => elements.Count;
 
     public void Enqueue(T item, int priority)
@@ -21,17 +20,19 @@ public class PriorityQueue<T>
             if (elements[i].priority < elements[bestIndex].priority)
                 bestIndex = i;
         }
-
         T bestItem = elements[bestIndex].item;
         elements.RemoveAt(bestIndex);
         return bestItem;
     }
 }
 
+
+
+
 public static class Pathfinding
 {
     public static List<Vector3Int> FindPath(Tilemap groundTilemap, Vector3Int start, Vector3Int goal, Unit movingUnit)
-    { 
+    {
         List<Vector3Int> path = new();
         Dictionary<Vector3Int, Vector3Int> cameFrom = new();
         Dictionary<Vector3Int, int> costSoFar = new();
@@ -47,45 +48,69 @@ public static class Pathfinding
             Vector3Int.up, Vector3Int.down, Vector3Int.left, Vector3Int.right
         };
 
+        bool reachedGoal = false;
+
         while (frontier.Count > 0)
         {
             Vector3Int current = frontier.Dequeue();
-            if (current == goal) break;
+            if (current == goal)
+            {
+                reachedGoal = true;
+                break;
+            }
 
             foreach (Vector3Int dir in directions)
             {
                 Vector3Int next = current + dir;
-               
-                if (!groundTilemap.HasTile(next)) continue; // 오직 Ground 타일만 통과      
-                if (GetUnitOnTile(next) != null) continue; // 이동 위치에 유닛이 존재하면 차단
+
+                if (!groundTilemap.HasTile(next)) continue;
+                if (GetUnitOnTile(next) != null && next != goal) continue; // 유닛이 있으면 못 감
 
                 int newCost = costSoFar[current] + 1;
                 if (!costSoFar.ContainsKey(next) || newCost < costSoFar[next])
                 {
                     costSoFar[next] = newCost;
-                    int priority = newCost + Heuristic(next, goal);
+                    int priority = newCost + Mathf.Abs(next.x - goal.x) + Mathf.Abs(next.y - goal.y);
                     frontier.Enqueue(next, priority);
                     cameFrom[next] = current;
                 }
             }
         }
 
-        Vector3Int cur = goal;
+        // 도착 불가능하면 goal 대신 "goal과 가장 가까운 reachable 노드" 찾기
+        Vector3Int target = goal;
+        if (!reachedGoal)
+        {
+            int bestDist = int.MaxValue;
+            Vector3Int bestReachable = start;
+
+            foreach (var kvp in costSoFar)
+            {
+                int dist = Mathf.Abs(kvp.Key.x - goal.x) + Mathf.Abs(kvp.Key.y - goal.y);
+                if (dist < bestDist)
+                {
+                    bestDist = dist;
+                    bestReachable = kvp.Key;
+                }
+            }
+
+            target = bestReachable;
+        }
+
+        // 경로 생성
+        Vector3Int cur = target;
         while (cur != start)
         {
             path.Insert(0, cur);
             if (cameFrom.ContainsKey(cur))
                 cur = cameFrom[cur];
-            else break; 
+            else break;
         }
+
         return path;
     }
-
-    private static int Heuristic(Vector3Int a, Vector3Int b)
-    {
-        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
-    }
-    public static Unit GetUnitOnTile(Vector3Int tile) // tile 좌표 위에 위치한 유닛 반환
+    
+    public static Unit GetUnitOnTile(Vector3Int tile)
     {
         foreach (var unit in BattleManager.Instance.alivePlayerUnits)
         {
@@ -99,6 +124,7 @@ public static class Pathfinding
         }
         return null;
     }
+
     public static List<Vector3Int> GetPlayerUnitTiles()
     {
         List<Vector3Int> tiles = new();

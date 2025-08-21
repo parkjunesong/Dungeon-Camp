@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4098477265794572474}
   - component: {fileID: 2285490138430360460}
   m_Layer: 0
-  m_Name: effectHighlightPrefab
+  m_Name: effectPreview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -18,6 +18,6 @@ public class Card_CharaSkill : Card_Base
         caster = BattleManager.Instance.alivePlayerUnits[0];
         effect = new Effect_Damage(1, 4, 1, EffectTarget.Enemy, EffectType.SetTarget);
 
-        EffectPreviewManager.Instance.StartTargeting(caster, effect, caster.groundTilemap);
+        //EffectPreview.Instance.StartTargeting(caster, effect, caster.groundTilemap);
     }
 }
