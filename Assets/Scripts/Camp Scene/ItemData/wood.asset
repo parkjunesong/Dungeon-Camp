@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: wood
   m_EditorClassIdentifier: 
   itemName: wood
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 4ab35e263cd16cf4d9adfce11409da70, type: 3}
   description: "\uB098\uBB34\uB2E4"
