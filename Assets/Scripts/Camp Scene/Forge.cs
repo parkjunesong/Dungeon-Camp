@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class Forge : MonoBehaviour
 {
-    public GameObject redPanel;
+    //public GameObject redPanel;
+    public CampUIManager.Panel redPanel;
 
     void OnMouseDown()
     {
-        if (CampUIManager.isUIPanelOpen)
+        if (CampUIManager.Instance.isUIPanelOpen(redPanel.name))
         {
             return;
         }
 
         if (redPanel != null)
         {
-            CampUIManager.OpenUIPanel(redPanel);
+            CampUIManager.Instance.OpenUIPanel(redPanel.name);
         }
     }
 }

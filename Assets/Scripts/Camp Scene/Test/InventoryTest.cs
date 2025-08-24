@@ -33,5 +33,17 @@ public class InventoryTest : MonoBehaviour
             InventoryManager.Instance.RemoveItem(stone);
             InventoryUI.Instance.UpdateSlotUI();
         }
+        //I키 - 인벤토리 열기/닫기
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (CampUIManager.Instance.isUIPanelOpen("Inventory"))
+            {
+                CampUIManager.Instance.CloseUIPanel();
+            }
+            else
+            {
+                CampUIManager.Instance.OpenUIPanel("Inventory");
+            }
+        }
     }
 }

@@ -35,7 +35,7 @@ public class CampFireManager : MonoBehaviour
         UpdateUnitListContainerUI();
     }
 
-    void UpdateUnitListContainerUI() //UI에 유닛카드 표시/업데이트
+    void UpdateUnitListContainerUI() //UI에 유닛카드 표시/업데이트 | 별도 스크립트로 빼도 좋을듯
     {
         foreach (Transform child in unitListContainer)
         {

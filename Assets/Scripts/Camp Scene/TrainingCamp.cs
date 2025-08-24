@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class TrainingCamp : MonoBehaviour
 {
-    public GameObject yellowPanel;
+    //public GameObject yellowPanel;
+    public CampUIManager.Panel yellowPanel;
 
     void OnMouseDown()
     {
-        if (CampUIManager.isUIPanelOpen)
+        if (CampUIManager.Instance.isUIPanelOpen(yellowPanel.name))
         {
             return;
         }
 
         if (yellowPanel != null)
         {
-            CampUIManager.OpenUIPanel(yellowPanel);
+            CampUIManager.Instance.OpenUIPanel(yellowPanel.name);
         }
     }
 }

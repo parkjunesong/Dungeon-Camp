@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class Tavern : MonoBehaviour
 {
-    public GameObject greenPanel;
+    //public GameObject greenPanel;
+    public CampUIManager.Panel greenPanel;
 
     void OnMouseDown()
     {
-        if (CampUIManager.isUIPanelOpen)
+        if (CampUIManager.Instance.isUIPanelOpen(greenPanel.name))
         {
             return;
         }
 
         if (greenPanel != null)
         {
-            CampUIManager.OpenUIPanel(greenPanel);
+            CampUIManager.Instance.OpenUIPanel(greenPanel.name);
         }
     }
 }

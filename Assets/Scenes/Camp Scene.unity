@@ -207,7 +207,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1168336289}
         m_TargetAssemblyTypeName: CampUIManager, Assembly-CSharp
-        m_MethodName: OnCloseButtonClicked
+        m_MethodName: CloseUIPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -340,7 +340,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1168336289}
         m_TargetAssemblyTypeName: CampUIManager, Assembly-CSharp
-        m_MethodName: OnCloseButtonClicked
+        m_MethodName: CloseUIPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -766,7 +766,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5af66c3cee615ab4fb65a484a6a62b25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bluePanel: {fileID: 2017389555}
+  bluePanel:
+    name: SkillCamp
+    panelObject: {fileID: 2017389555}
 --- !u!1 &446625297
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,7 +854,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1168336289}
         m_TargetAssemblyTypeName: CampUIManager, Assembly-CSharp
-        m_MethodName: OnCloseButtonClicked
+        m_MethodName: CloseUIPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1195,7 +1197,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1168336289}
         m_TargetAssemblyTypeName: CampUIManager, Assembly-CSharp
-        m_MethodName: OnCloseButtonClicked
+        m_MethodName: CloseUIPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1253,6 +1255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 742427688}
   - component: {fileID: 742427689}
+  - component: {fileID: 742427690}
   m_Layer: 0
   m_Name: InventoryManager
   m_TagString: Untagged
@@ -1291,6 +1294,21 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: b653d9cc3870b25429a99cec1bc5a21f, type: 2}
     quantity: 1
   maxSlots: 20
+--- !u!114 &742427690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742427687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b70f2ecbf46304595eac64e32ef7e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryPanel: {fileID: 1257996476}
+  slotPrefab: {fileID: 6621065397850731593, guid: 43e39e210336f5f4390b330da7f857d3,
+    type: 3}
 --- !u!1 &744118938
 GameObject:
   m_ObjectHideFlags: 0
@@ -1434,7 +1452,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5caa6c2042680ca458d44a000c378a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  campFirePanel: {fileID: 2124947150}
+  campFirePanel:
+    name: CampFire
+    panelObject: {fileID: 2124947150}
 --- !u!1 &789295164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1703,7 +1723,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6675098594aa142a1d24b05145b15d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  redPanel: {fileID: 1623046289}
+  redPanel:
+    name: Forge
+    panelObject: {fileID: 1623046289}
 --- !u!1 &1062665330
 GameObject:
   m_ObjectHideFlags: 0
@@ -1989,7 +2011,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f51eb7614c80624690e244ff7fe1d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yellowPanel: {fileID: 554204769}
+  yellowPanel:
+    name: TrainingCamp
+    panelObject: {fileID: 554204769}
 --- !u!1 &1168336287
 GameObject:
   m_ObjectHideFlags: 0
@@ -2034,6 +2058,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11363f740d1a31c45b5905f43e4e157a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panels:
+  - name: Inventory
+    panelObject: {fileID: 1257996475}
+  - name: CampFire
+    panelObject: {fileID: 2124947150}
+  - name: Forge
+    panelObject: {fileID: 1623046289}
+  - name: SkillCamp
+    panelObject: {fileID: 2017389555}
+  - name: TrainingCamp
+    panelObject: {fileID: 554204769}
+  - name: Tavern
+    panelObject: {fileID: 1062665330}
 --- !u!1 &1257996475
 GameObject:
   m_ObjectHideFlags: 0
@@ -2046,14 +2083,13 @@ GameObject:
   - component: {fileID: 1257996478}
   - component: {fileID: 1257996477}
   - component: {fileID: 1257996479}
-  - component: {fileID: 1257996480}
   m_Layer: 5
   m_Name: InventoryPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1257996476
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2136,21 +2172,6 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!114 &1257996480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1257996475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69b70f2ecbf46304595eac64e32ef7e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryPanel: {fileID: 1257996476}
-  slotPrefab: {fileID: 6621065397850731593, guid: 43e39e210336f5f4390b330da7f857d3,
-    type: 3}
 --- !u!1 &1349915726
 GameObject:
   m_ObjectHideFlags: 0
@@ -2294,7 +2315,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0361d1fa767c864c97b9a5acf8025d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greenPanel: {fileID: 1062665330}
+  greenPanel:
+    name: Tavern
+    panelObject: {fileID: 1062665330}
 --- !u!1 &1357259666
 GameObject:
   m_ObjectHideFlags: 0
@@ -2771,7 +2794,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1168336289}
         m_TargetAssemblyTypeName: CampUIManager, Assembly-CSharp
-        m_MethodName: OnCloseButtonClicked
+        m_MethodName: CloseUIPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

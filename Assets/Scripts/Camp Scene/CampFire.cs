@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class CampFire : MonoBehaviour
 {
-    public GameObject campFirePanel;
+    //public GameObject campFirePanel;
+    public CampUIManager.Panel campFirePanel;
 
     void OnMouseDown()
     {
-        if (CampUIManager.isUIPanelOpen)
+        if (CampUIManager.Instance.isUIPanelOpen(campFirePanel.name))
         {
             return;
         }
 
         if (campFirePanel != null)
         {
-            CampUIManager.OpenUIPanel(campFirePanel);
+            CampUIManager.Instance.OpenUIPanel(campFirePanel.name);
         }
     }
 }
