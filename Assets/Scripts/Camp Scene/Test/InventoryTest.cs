@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InventoryTest : MonoBehaviour
 {
+    public GameObject Inven;
     public Item wood;
     public Item stone;
 
@@ -36,14 +37,8 @@ public class InventoryTest : MonoBehaviour
         //I키 - 인벤토리 열기/닫기
         if (Input.GetKeyDown(KeyCode.I))
         {
-            if (CampUIManager.Instance.isUIPanelOpen("Inventory"))
-            {
-                CampUIManager.Instance.CloseUIPanel();
-            }
-            else
-            {
-                CampUIManager.Instance.OpenUIPanel("Inventory");
-            }
+            if (Inven.activeSelf) CampUIManager.Instance.CloseUIPanel();
+            else CampUIManager.Instance.OpenUIPanel("InventoryPanel");
         }
     }
 }
